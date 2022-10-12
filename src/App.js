@@ -1,5 +1,7 @@
 import {Route, Redirect, Switch} from 'react-router-dom'
 import './App.css'
+import Apparel from './pages/apparel/Apparel'
+import Collectables from './pages/collectables/Collectables'
 import Home from './pages/home/Home'
 
 function App() {
@@ -7,6 +9,12 @@ function App() {
         <Switch>
             <Route path='/' exact>
                 <Home />
+            </Route>
+            <Route path='/Apparel'>
+                <Apparel />
+            </Route>
+            <Route path='/Collectables'>
+                <Collectables />
             </Route>
             <Redirect to='/' />
         </Switch>
