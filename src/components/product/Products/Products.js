@@ -20,7 +20,9 @@ function Products(props) {
                         productName={product.productName}
                         description={product.description}
                         price={product.price}
-                        image={product.image} />
+                        anime={product.anime}
+                        image={product.image}
+                        type={product.type} />
                 )
             })}
         </div>
