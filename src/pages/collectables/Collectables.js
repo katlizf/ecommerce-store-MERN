@@ -1,4 +1,4 @@
-import Products from "../../components/product/Products/Products"
+import Products from "../../components/Products/Products"
 
 function Collectables() {
 
