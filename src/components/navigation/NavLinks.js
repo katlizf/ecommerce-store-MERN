@@ -5,7 +5,7 @@ function NavLinks() {
     return (
         <ul className='nav-links'>
             <li>
-                <NavLink to='/'>Home</NavLink>
+                <NavLink to='/' exact>Home</NavLink>
             </li>
             <li>
                 <NavLink to='/Apparel'>Apparel</NavLink>
