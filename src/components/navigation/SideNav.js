@@ -1,11 +1,20 @@
 import ReactDOM from 'react-dom'
+import {CSSTransition} from 'react-transition-group'
 import './SideNav.scss'
 
 function SideNav(props) {
     const content = (
-        <aside className='side-nav'>
-            {props.children}
-        </aside>
+        <CSSTransition
+            in={props.show}
+            timeout={200}
+            classNames='slide-in-left'
+            mountOnEnter
+            unmountOnExit
+            >
+            <aside className='side-nav'>
+                {props.children}
+            </aside>
+        </CSSTransition>
     )
     return ReactDOM.createPortal(content, document.getElementById('side-nav-hook'))
 }

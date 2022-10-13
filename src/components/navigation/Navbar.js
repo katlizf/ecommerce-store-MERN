@@ -20,11 +20,11 @@ function Navbar(props) {
     return (
         <div>
             {sideNavOpen && <Backdrop onClick={closeSideNav}/>}
-            {sideNavOpen && <SideNav >
+            <SideNav show={sideNavOpen}>
                 <nav className="side-nav">
                     <NavLinks />         
                 </nav>
-            </SideNav>}
+            </SideNav>
             <MainHeader>
                 <button className="menu-btn" onClick={openSideNav}>
                     <span />
