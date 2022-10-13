@@ -20,7 +20,7 @@ function Navbar(props) {
     return (
         <div>
             {sideNavOpen && <Backdrop onClick={closeSideNav}/>}
-            <SideNav show={sideNavOpen}>
+            <SideNav show={sideNavOpen} onClick={closeSideNav}>
                 <nav className="side-nav">
                     <NavLinks />         
                 </nav>

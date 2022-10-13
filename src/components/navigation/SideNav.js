@@ -11,7 +11,7 @@ function SideNav(props) {
             mountOnEnter
             unmountOnExit
             >
-            <aside className='side-nav'>
+            <aside className='side-nav' onClick={props.onClick}>
                 {props.children}
             </aside>
         </CSSTransition>
