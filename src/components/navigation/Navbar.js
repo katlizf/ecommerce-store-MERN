@@ -2,18 +2,31 @@ import MainHeader from "./MainHeader"
 import {Link} from 'react-router-dom'
 import NavLinks from "./NavLinks"
 import SideNav from "./SideNav"
+import {useState} from 'react'
+import Backdrop from './Backdrop'
 import './Navbar.scss'
 
 function Navbar(props) {
+
+    const [sideNavOpen, setSideNavOpen] = useState(false)
+
+    const openSideNav = () => {
+        setSideNavOpen(true)
+    }
+    const closeSideNav = () => {
+        setSideNavOpen(false)
+    }
+
     return (
         <div>
-            <SideNav >
+            {sideNavOpen && <Backdrop onClick={closeSideNav}/>}
+            {sideNavOpen && <SideNav >
                 <nav className="side-nav">
                     <NavLinks />         
                 </nav>
-            </SideNav>
+            </SideNav>}
             <MainHeader>
-                <button className="menu-btn">
+                <button className="menu-btn" onClick={openSideNav}>
                     <span />
                     <span />
                     <span />
