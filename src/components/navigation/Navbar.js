@@ -1,5 +1,6 @@
 import MainHeader from "./MainHeader"
 import {Link} from 'react-router-dom'
+import NavLinks from "./NavLinks"
 import './Navbar.scss'
 
 function Navbar(props) {
@@ -14,7 +15,7 @@ function Navbar(props) {
                 <Link to='/'>Weebs-R-Us</Link>                
             </h1>
             <nav>
-                ...
+                <NavLinks />
             </nav>
         </MainHeader>
     )
