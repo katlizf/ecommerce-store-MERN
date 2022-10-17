@@ -1,3 +1,5 @@
+import Button from "../button/Button"
+
 function Product(props) {
     return (
         <div>
@@ -10,7 +12,7 @@ function Product(props) {
             </div>
             <div>
                 <h2>{props.price}</h2>
-                {/* <button>Add To Cart</button> */}
+                <Button>Add to Cart</Button>
             </div>
         </div>
     )
