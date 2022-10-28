@@ -4,7 +4,6 @@ import NavLinks from "./NavLinks"
 import SideNav from "./SideNav"
 import {useState} from 'react'
 import Backdrop from './Backdrop'
-import './Navbar.scss'
 
 function Navbar(props) {
 

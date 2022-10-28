@@ -1,5 +1,4 @@
 import ReactDOM from 'react-dom'
-import './Backdrop.scss'
 
 function Backdrop(props) {
     return (

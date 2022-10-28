@@ -1,6 +1,5 @@
 import ReactDOM from 'react-dom'
 import {CSSTransition} from 'react-transition-group'
-import './SideNav.scss'
 
 function SideNav(props) {
     const content = (
