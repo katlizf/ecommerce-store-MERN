@@ -1,3 +1,26 @@
-.app_container {
-    display: flex;
+@import url('https://fonts.googleapis.com/css2?family=Kdam+Thmor+Pro&display=swap');
+
+
+@import '_breakpoints';
+@import '_colors';
+
+// pages
+
+
+// components
+@import './components/button/_button';
+@import './components/navigation/_backdrop';
+@import './components/navigation/_mainHeader';
+@import './components/navigation/_navbar';
+@import './components/navigation/_navLinks';
+@import './components/navigation/_sideNav';
+
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Kdam Thmor Pro', sans-serif;
 }
