@@ -2,16 +2,18 @@
     label {
         font-weight: 500;
     }
-    --invalid label {
-        color: $danger;
-    }
     input {
         width: 20rem;
     }
     input:focus {
         border-width: 2px;
     }
-    --invalid input {
+}
+.form-control--invalid {
+    label {
+        color: $danger;
+    }
+    input {
         border-color: $danger;
         background-color: #ffd1d1;
     }
