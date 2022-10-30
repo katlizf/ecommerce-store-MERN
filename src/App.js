@@ -4,6 +4,7 @@ import Apparel from './pages/apparel/Apparel'
 import Collectables from './pages/collectables/Collectables'
 import Home from './pages/home/Home'
 import Profile from './pages/profile/Profile'
+import Login from './pages/user/Login'
 import './_app.scss'
 
 function App() {
@@ -19,6 +20,9 @@ function App() {
                 </Route>
                 <Route path='/Collectables'>
                     <Collectables />
+                </Route>
+                <Route path='/Login'>
+                    <Login />
                 </Route>
                 <Route path='/Profile'>
                     <Profile />
