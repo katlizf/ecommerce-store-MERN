@@ -5,7 +5,7 @@ function Login() {
     return (
         <PageContainer className="login">
           <form>
-            <Input type="text" label="First Name: " />
+            <Input type="text" label="First Name: " validators={[]} errorText="Please enter a valid response." />
         </form>  
         </PageContainer>
         
