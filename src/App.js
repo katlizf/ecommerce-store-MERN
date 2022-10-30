@@ -3,6 +3,7 @@ import Navbar from './components/navigation/Navbar'
 import Apparel from './pages/apparel/Apparel'
 import Collectables from './pages/collectables/Collectables'
 import Home from './pages/home/Home'
+import Profile from './pages/profile/Profile'
 import './_app.scss'
 
 function App() {
@@ -18,6 +19,9 @@ function App() {
                 </Route>
                 <Route path='/Collectables'>
                     <Collectables />
+                </Route>
+                <Route path='/Profile'>
+                    <Profile />
                 </Route>
                 <Redirect to='/' />
             </Switch> 
