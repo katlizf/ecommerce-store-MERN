@@ -1,4 +1,4 @@
-import Button from "../formElements/button/Button"
+import Button from "../../formElements/button/Button"
 
 function Product(props) {
     return (
