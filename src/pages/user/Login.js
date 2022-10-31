@@ -1,4 +1,4 @@
-import Input from "../../components/input/Input"
+import Input from "../../components/formElements/input/Input"
 import PageContainer from '../../components/pageContainer/PageContainer'
 
 function Login() {
