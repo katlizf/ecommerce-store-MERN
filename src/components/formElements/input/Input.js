@@ -1,4 +1,5 @@
 import {useReducer} from 'react'
+import {validate} from '../../util/Validators'
 
 const inputReducer = (state, action) => {
     switch (action.type) {
@@ -6,8 +7,7 @@ const inputReducer = (state, action) => {
             return {
                 ...state,
                 value: action.val,
-                isValid: true
-                // need to replace with validation logic later
+                isValid: validate(action.val, action.validators)
             };
         default:
             return state;
@@ -19,7 +19,7 @@ function Input(props) {
     const [inputState, dispatch] = useReducer(inputReducer, {value: '', isValid: false})
 
     const changeHandler = e => {
-        dispatch({type: 'CHANGE', val: e.target.value})
+        dispatch({type: 'CHANGE', val: e.target.value, validators: props.validators})
     }
 
     return (
