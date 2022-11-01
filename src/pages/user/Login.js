@@ -1,12 +1,57 @@
 import Input from "../../components/formElements/input/Input"
 import PageContainer from '../../components/pageContainer/PageContainer'
-import {useCallback} from "react"
+import {useCallback, useReducer} from "react"
 import {VALIDATOR_MINLENGTH} from '../../components/util/Validators'
+
+const loginReducer = (state, action) => {
+    
+    switch (action.type) {
+        case 'INPUT_CHANGE':
+            let formIsValid = true
+            for (const inputId in state.inputs) {
+                if (inputId === action.inputId) {
+                    formIsValid = formIsValid && action.isValid
+                } else {
+                    formIsValid = formIsValid && state.inputs[inputId].isValid
+                }
+            }
+            return {
+                ...state,
+                input: {
+                    ...state.inputs,
+                    [action.inputId] : {value: action.value, isValid: action.isValid}
+                },
+                isValid: formIsValid
+            }
+        default:
+            return state
+    }
+}
 
 function Login() {
 
-    const userInputHandler = useCallback((id, value, isValid) => {
+    const [formState, dispatch] = useReducer(loginReducer, {
+        inputs: {
+           fName: {
+            value: '',
+            isValid: false
+           },
+           lName: {
+            value: '',
+            isValid: false
+           }
+        },
+        // the validity of the individual inputs
+        isValid: false
+        // whether the entire form is valid 
+    })
 
+    const userInputHandler = useCallback((id, value, isValid) => {
+        dispatch({
+            type: 'INPUT_CHANGE',
+            value: value,
+            isValid: isValid,
+            inputId: id})
     }, [])
     // using useCallback to prevent an infinite loop with the useEffect in the input component
 
