@@ -1,5 +1,6 @@
 import Input from "../../components/formElements/input/Input"
 import PageContainer from '../../components/pageContainer/PageContainer'
+import Button from '../../components/formElements/button/Button'
 import {useCallback, useReducer} from "react"
 import {VALIDATOR_MINLENGTH} from '../../components/util/Validators'
 
@@ -17,7 +18,7 @@ const loginReducer = (state, action) => {
             }
             return {
                 ...state,
-                input: {
+                inputs: {
                     ...state.inputs,
                     [action.inputId] : {value: action.value, isValid: action.isValid}
                 },
@@ -72,6 +73,7 @@ function Login() {
                 validators={[VALIDATOR_MINLENGTH(1)]}
                 errorText="Please enter your last name."
                 onInput={userInputHandler} />
+            <Button type="submit" disabled={!formState.isValid}>Log-in</Button>
         </form>  
         </PageContainer>
         
