@@ -13,7 +13,7 @@ function NavLinks() {
                 <NavLink to='/Collectables'>Collectables</NavLink>
             </li>
             <li>
-                <NavLink to='/Auth'>Login</NavLink>
+                <NavLink to='/Login'>Login</NavLink>
             </li>
             <li>
                 <NavLink to='/Profile'> My Profile</NavLink>
