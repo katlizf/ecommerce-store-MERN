@@ -1,4 +1,4 @@
-import {useReducer} from 'react'
+import {useReducer, useEffect} from 'react'
 import {validate} from '../../util/Validators'
 
 const inputReducer = (state, action) => {
@@ -31,6 +31,13 @@ function Input(props) {
     const touchHandler = () => {
         dispatch({type: 'TOUCH'})
     }
+
+    const {id, onInput} = props
+    const {value, isValid} = inputState
+
+    useEffect(() => {
+        onInput(id, value, isValid)
+    }, [id, value, isValid, onInput])
 
     return (
         <div className={`form-control ${!inputState.isValid && inputState.isTouched && 'form-control--invalid'}`}>
