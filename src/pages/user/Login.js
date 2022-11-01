@@ -56,9 +56,15 @@ function Login() {
     }, [])
     // using useCallback to prevent an infinite loop with the useEffect in the input component
 
+    const loginHandler = e => {
+        e.preventDefault()
+        console.log(formState.inputs)
+        // will later send to db
+    }
+
     return (
         <PageContainer className="login">
-          <form>
+          <form className="login-form" onSubmit={loginHandler}>
             <Input
                 id="fName"
                 type="text"
