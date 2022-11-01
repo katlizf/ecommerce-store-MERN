@@ -1,75 +1,81 @@
 import Input from "../../components/formElements/input/Input"
 import Button from '../../components/formElements/button/Button'
-import {useCallback, useReducer, useState} from "react"
+import {useForm} from "../../hooks/FormHook"
+import {useState} from "react"
 import {VALIDATOR_REQUIRE, VALIDATOR_EMAIL, VALIDATOR_PASSWORD, VALIDATOR_MINLENGTH, VALIDATOR_MAXLENGTH} from '../../components/util/Validators'
-
-const registerReducer = (state, action) => {
-    
-    switch (action.type) {
-        case 'INPUT_CHANGE':
-            let formIsValid = true
-            for (const inputId in state.inputs) {
-                if (inputId === action.inputId) {
-                    formIsValid = formIsValid && action.isValid
-                } else {
-                    formIsValid = formIsValid && state.inputs[inputId].isValid
-                }
-            }
-            return {
-                ...state,
-                inputs: {
-                    ...state.inputs,
-                    [action.inputId] : {value: action.value, isValid: action.isValid}
-                },
-                isValid: formIsValid
-            }
-        default:
-            return state
-    }
-}
 
 function Auth() {
 
+    const [formState, userInputHandler, setFormData] = useForm({
+        email: {
+            value: '',
+            isValid: false
+        },
+        password: {
+            value: '',
+            isValid: false
+        }
+    }, false)
+
     const [isLoginMode, setIsLoginMode] = useState(true)
 
-    const [formState, dispatch] = useReducer(registerReducer, {
-        inputs: {
-           fName: {
-            value: '',
-            isValid: false
-           },
-           lName: {
-            value: '',
-            isValid: false
-           }
-        },
-        // the validity of the individual inputs
-        isValid: false
-        // whether the entire form is valid 
-    })
-
-    const userInputHandler = useCallback((id, value, isValid) => {
-        dispatch({
-            type: 'INPUT_CHANGE',
-            value: value,
-            isValid: isValid,
-            inputId: id})
-    }, [])
-    // using useCallback to prevent an infinite loop with the useEffect in the input component
-
-    const submitHandler = e => {
+    const authSubmitHandler = e => {
         e.preventDefault()
         console.log(formState.inputs)
         // will later send to db
     }
 
     const switchModeHandler = () => {
+        if (!isLoginMode) {
+            setFormData({
+                ...formState.inputs,
+                fName: undefined,
+                lName: undefined,
+                address: undefined,
+                aptEtc: undefined,
+                city: undefined,
+                state: undefined,
+                ZipCode: undefined
+            }, formState.inputs.email.isValid && formState.inputs.password.isValid)
+        } else {
+            setFormData({
+                ...formState.inputs,
+                fName: {
+                    value: '',
+                    isValid: false
+                },
+                lName: {
+                    value: '',
+                    isValid: false
+                },
+                address: {
+                    value: '',
+                    isValid: false
+                },
+                aptEtc: {
+                    value: '',
+                    isValid: true
+                },
+                city: {
+                    value: '',
+                    isValid: false
+                },
+                state: {
+                    value: '',
+                    isValid: false
+                },
+                zipCode: {
+                    value: '',
+                    isValid: false
+                }
+            }, false)
+        }
         setIsLoginMode(prevMode => !prevMode)
     }
 
     return (
         <div className="auth">
-          <form className="auth-form" onSubmit={submitHandler}>
+          <form className="auth-form" onSubmit={authSubmitHandler}>
             {!isLoginMode && 
                 <div>
                     <Input
@@ -87,7 +93,7 @@ function Auth() {
                         errorText="Please enter your last name."
                         onInput={userInputHandler} />
                     <Input
-                        id="stAddress"
+                        id="address"
                         type="text"
                         label="Street Address: "
                         validators={[VALIDATOR_REQUIRE]}
