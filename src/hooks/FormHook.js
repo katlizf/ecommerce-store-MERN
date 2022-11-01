@@ -5,6 +5,10 @@ const formReducer = (state, action) => {
         case 'INPUT_CHANGE':
             let formIsValid = true
             for (const inputId in state.inputs) {
+                if (!state.inputs[inputId]) {
+                    continue
+                    // skip the inputId and go to the next instead of running the next statements when I don't have to
+                }
                 if (inputId === action.inputId) {
                     formIsValid = formIsValid && action.isValid
                 } else {
@@ -39,7 +43,7 @@ export const useForm = (initialInputs, initialFormValidity) => {
             isValid: isValid,
             inputId: id})
     }, [])
-    
+
     const setFormData = useCallback((inputData, formValidity) => {
         dispatch({
             type: 'SET_DATA',
