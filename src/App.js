@@ -20,10 +20,28 @@ function App() {
         setIsLoggedIn(false)
     }, [])
 
-    return (
-        <AuthContext.Provider value={{isLoggedIn: isLoggedIn, login: login, logout: logout}}>
-           <Navbar />
-            <Switch>
+    let routes
+    if (isLoggedIn) {
+        routes = (
+            <>
+                <Route path='/' exact>
+                    <Home />
+                </Route>
+                <Route path='/Apparel'>
+                    <Apparel />
+                </Route>
+                <Route path='/Collectables'>
+                    <Collectables />
+                </Route>
+                <Route path='/Profile'>
+                    <Profile />
+                </Route>
+                <Redirect to='/' />
+            </>
+        )
+    } else {
+        routes = (
+            <>
                 <Route path='/' exact>
                     <Home />
                 </Route>
@@ -36,10 +54,16 @@ function App() {
                 <Route path='/Auth'>
                     <Auth />
                 </Route>
-                <Route path='/Profile'>
-                    <Profile />
-                </Route>
-                <Redirect to='/' />
+                <Redirect to='/Auth' />
+            </>
+        )
+    }
+
+    return (
+        <AuthContext.Provider value={{isLoggedIn: isLoggedIn, login: login, logout: logout}}>
+           <Navbar />
+            <Switch>
+                {routes}
             </Switch> 
         </AuthContext.Provider>
     )
