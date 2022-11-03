@@ -22,7 +22,10 @@ const inputReducer = (state, action) => {
 
 function Input(props) {
 
-    const [inputState, dispatch] = useReducer(inputReducer, {value: '', isValid: false})
+    const [inputState, dispatch] = useReducer(inputReducer, {
+        value: props.value || '',
+        isTouched: false,
+        isValid: props.valid || false})
 
     const changeHandler = e => {
         dispatch({type: 'CHANGE', val: e.target.value, validators: props.validators})
