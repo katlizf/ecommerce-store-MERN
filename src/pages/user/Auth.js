@@ -1,9 +1,9 @@
 import Input from "../../components/formElements/input/Input"
 import Button from '../../components/formElements/button/Button'
-import {AuthContext} from "../../components/context/AuthContext"
+import {AuthContext} from "../../context/AuthContext"
 import {useForm} from "../../hooks/FormHook"
 import {useState, useContext} from "react"
-import {VALIDATOR_REQUIRE, VALIDATOR_EMAIL, VALIDATOR_PASSWORD, VALIDATOR_MINLENGTH, VALIDATOR_MAXLENGTH} from '../../components/util/Validators'
+import {VALIDATOR_REQUIRE, VALIDATOR_EMAIL, VALIDATOR_PASSWORD, VALIDATOR_MINLENGTH, VALIDATOR_MAXLENGTH} from '../../util/Validators'
 
 function Auth() {
 
