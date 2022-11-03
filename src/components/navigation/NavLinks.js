@@ -17,13 +17,20 @@ function NavLinks() {
             <li>
                 <NavLink to='/Collectables'>Collectables</NavLink>
             </li>
-            {!auth.isLoggedIn && <li>
-                <NavLink to='/Auth'>Login</NavLink>
-            </li>
+            {!auth.isLoggedIn &&
+                <li>
+                    <NavLink to='/Auth'>Login</NavLink>
+                </li>
             }
-            {auth.isLoggedIn && <li>
-                <NavLink to='/Profile'> My Profile</NavLink>
-            </li>
+            {auth.isLoggedIn && 
+                <li>
+                    <NavLink to='/Profile'> My Profile</NavLink>
+                </li>
+            }
+            {auth.isLoggedIn &&
+                <li>
+                    <button onClick={auth.logout}>Logout</button>
+                </li>
             }
         </ul>
     )
