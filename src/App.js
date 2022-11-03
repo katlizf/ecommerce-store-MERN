@@ -1,3 +1,4 @@
+import {useState, useCallback} from 'react'
 import {Route, Redirect, Switch} from 'react-router-dom'
 import Navbar from './components/navigation/Navbar'
 import Apparel from './pages/apparel/Apparel'
@@ -5,11 +6,22 @@ import Collectables from './pages/collectables/Collectables'
 import Home from './pages/home/Home'
 import Profile from './pages/profile/Profile'
 import Auth from './pages/user/Auth'
-import './_app.scss'
+import {AuthContext} from './components/context/AuthContext'
 
 function App() {
+
+    const [isLoggedIn, setIsLoggedIn] = useState(false)
+
+    const login = useCallback(() => {
+        setIsLoggedIn(true)
+    }, [])
+
+    const logout = useCallback(() => {
+        setIsLoggedIn(false)
+    }, [])
+
     return (
-        <div>
+        <AuthContext.Provider value={{isLoggedIn: isLoggedIn, login: login, logout: logout}}>
            <Navbar />
             <Switch>
                 <Route path='/' exact>
@@ -29,7 +41,7 @@ function App() {
                 </Route>
                 <Redirect to='/' />
             </Switch> 
-        </div>
+        </AuthContext.Provider>
     )
 }
 
