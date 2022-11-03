@@ -1,10 +1,13 @@
 import Input from "../../components/formElements/input/Input"
 import Button from '../../components/formElements/button/Button'
+import {AuthContext} from "../../components/context/AuthContext"
 import {useForm} from "../../hooks/FormHook"
-import {useState} from "react"
+import {useState, useContext} from "react"
 import {VALIDATOR_REQUIRE, VALIDATOR_EMAIL, VALIDATOR_PASSWORD, VALIDATOR_MINLENGTH, VALIDATOR_MAXLENGTH} from '../../components/util/Validators'
 
 function Auth() {
+
+    const auth = useContext(AuthContext)
 
     const [formState, userInputHandler, setFormData] = useForm({
         email: {
@@ -23,6 +26,7 @@ function Auth() {
         e.preventDefault()
         console.log(formState.inputs)
         // will later send to db
+        auth.login()
     }
 
     const switchModeHandler = () => {
@@ -137,12 +141,12 @@ function Auth() {
                 onInput={userInputHandler} />
             <Input
                 id="password"
-                type="text"
+                type="password"
                 label="Password: "
                 validators={[VALIDATOR_PASSWORD]}
                 errorText="Please enter your password. It should include at least 1 uppercase, 1 lowercase, 1 number, & 1 special character."
                 onInput={userInputHandler} />
-            <Button type="submit" disabled={!formState.isValid}>{isLoginMode ? 'Register' : 'Login'}</Button>
+            <Button type="submit" disabled={!formState.isValid}>{isLoginMode ? 'Login' : 'Register'}</Button>
         </form>
             <Button inverse onClick={switchModeHandler}>Switch To {!isLoginMode ? 'Login' : 'Register'}</Button>  
         </div>
