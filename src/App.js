@@ -23,7 +23,7 @@ function App() {
     let routes
     if (isLoggedIn) {
         routes = (
-            <>
+            <Switch>
                 <Route path='/' exact>
                     <Home />
                 </Route>
@@ -37,11 +37,11 @@ function App() {
                     <Profile />
                 </Route>
                 <Redirect to='/' />
-            </>
+            </Switch>
         )
     } else {
         routes = (
-            <>
+            <Switch>
                 <Route path='/' exact>
                     <Home />
                 </Route>
@@ -55,16 +55,14 @@ function App() {
                     <Auth />
                 </Route>
                 <Redirect to='/Auth' />
-            </>
+            </Switch>
         )
     }
 
     return (
         <AuthContext.Provider value={{isLoggedIn: isLoggedIn, login: login, logout: logout}}>
            <Navbar />
-            <Switch>
-                {routes}
-            </Switch> 
+            {routes}
         </AuthContext.Provider>
     )
 }
