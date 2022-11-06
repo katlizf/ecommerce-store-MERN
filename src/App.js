@@ -6,7 +6,7 @@ import Collectables from './pages/collectables/Collectables'
 import Home from './pages/home/Home'
 import Profile from './pages/profile/Profile'
 import Auth from './pages/user/Auth'
-import {AuthContext} from './components/context/AuthContext'
+import {AuthContext} from './context/AuthContext'
 
 function App() {
 
