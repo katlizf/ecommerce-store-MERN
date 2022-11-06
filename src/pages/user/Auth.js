@@ -114,7 +114,7 @@ function Auth() {
                         type="text"
                         label="City: "
                         validators={[VALIDATOR_REQUIRE]}
-                        errorText="Please enter the city name."
+                        errorText="Please enter your city name."
                         onInput={userInputHandler} />
                     <Input
                         id="state"
@@ -144,7 +144,7 @@ function Auth() {
                 type="password"
                 label="Password: "
                 validators={[VALIDATOR_PASSWORD]}
-                errorText="Please enter your password. It should include at least 1 uppercase, 1 lowercase, 1 number, & 1 special character."
+                errorText="Your password must be at least 8 characters long and should include at least 1 uppercase, 1 lowercase, 1 number, & 1 special character."
                 onInput={userInputHandler} />
             <Button type="submit" disabled={!formState.isValid}>{isLoginMode ? 'Login' : 'Register'}</Button>
         </form>
