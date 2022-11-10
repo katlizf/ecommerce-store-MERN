@@ -25,6 +25,9 @@ router.get('/:pid', (req, res, next) => {
     const product = DUMMY_PLACES.find(p => {
         return p.id === productId
     })
+    if (!product) {
+        return res.status(404).json({message: 'Could not find a product for the provided id.'})
+    }
     res.json({product})
 })
 
