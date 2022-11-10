@@ -1,6 +1,6 @@
 class HttpError extends Error {
     construtor(message, errorCode) {
-        super(message)
+        this.message = message
         this.code = errorCode
     }
 }
