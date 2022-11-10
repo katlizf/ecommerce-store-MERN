@@ -1,5 +1,7 @@
 const express = require('express')
 
+const HttpError = require('../models/http-error')
+
 const router = express.Router()
 
 
@@ -26,7 +28,7 @@ router.get('/:pid', (req, res, next) => {
         return p.id === productId
     })
     if (!product) {
-        return res.status(404).json({message: 'Could not find a product for the provided id.'})
+        return next(new HttpError('Could not find a product for the product id.', 404))
     }
     res.json({product})
 })
