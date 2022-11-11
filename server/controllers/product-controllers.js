@@ -1,6 +1,6 @@
 const HttpError = require('../models/http-error')
 
-const DUMMY_PLACES = [
+const DUMMY_PRODUCTS = [
     {
         id: '1',
         productName: 'Sweatshirt',
@@ -13,13 +13,12 @@ const DUMMY_PLACES = [
 ]
 
 const getAllProducts = (req, res, next) => {
-    const products = DUMMY_PLACES
-    res.json({products})
+    res.json({products: DUMMY_PRODUCTS})
 }
 
 const getProductById = (req, res, next) => {
     const productId = req.params.pid
-    const product = DUMMY_PLACES.find(p => {
+    const product = DUMMY_PRODUCTS.find(p => {
         return p.id === productId
     })
     if (!product) {
