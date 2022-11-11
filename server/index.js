@@ -2,11 +2,18 @@ const express = require('express')
 const bodyParser = require('body-parser')
 
 const productRoutes = require('./routes/product-routes')
+const HttpError = require('./models/http-error')
 
 const app = express()
 
 
 app.use('/api/products', productRoutes)
+
+app.use((req, res, next) => {
+    const error = new HttpError('Could not find this route', 404)
+    throw error
+})
+// to handle errors for unsupported routes
 
 app.use((error, req, res, next) => {
     if (res.headerSent) {
