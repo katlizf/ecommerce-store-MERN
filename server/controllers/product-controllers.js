@@ -1,5 +1,4 @@
 const HttpError = require('../models/http-error')
-const {get} = require('../routes/product-routes')
 
 const DUMMY_PLACES = [
     {
