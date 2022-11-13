@@ -13,6 +13,7 @@ app.use('/api/products', productRoutes)
 app.use(bodyParser.json())
 
 app.use('/api/users', userRoutes)
+// will need more routes for users adding and removing products from their cart
 
 app.use((req, res, next) => {
     const error = new HttpError('Could not find this route', 404)
