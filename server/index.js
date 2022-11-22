@@ -1,12 +1,12 @@
 const express = require('express')
 const bodyParser = require('body-parser')
+const mongoose = require('mongoose')
 
 const productRoutes = require('./routes/product-routes')
 const userRoutes = require('./routes/user-routes')
 const HttpError = require('./models/http-error')
 
 const app = express()
-
 
 app.use('/api/products', productRoutes)
 
@@ -29,5 +29,7 @@ app.use((error, req, res, next) => {
     res.json({message: error.message || 'And unknown error occurred!'})
 })
 
-
-app.listen(5000)
+mongoose
+    .connect('mongodb+srv://kfaber:katie1234@anime-store-api.4vd2etk.mongodb.net/ecommerce?retryWrites=true&w=majority')
+    .then(() => {app.listen(5000)})
+    .catch(err => {console.log(err)})
