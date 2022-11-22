@@ -1,30 +1,38 @@
 const HttpError = require('../models/http-error')
+const Product = require('../models/product')
 
-const DUMMY_PRODUCTS = [
-    {
-        id: '1',
-        productName: 'Sweatshirt',
-        description: 'Black',
-        price: 29.99,
-        anime: 1,
-        image: 'https://images.shirtspace.com/large/v2klhrD32Mlj8xUCYUsnWg%3D%3D/250529/12388-soffe-b9289-soffe-youth-classic-hooded-sweatshirt-front-black.jpg',
-        type: 1
-    }
-]
 
-const getAllProducts = (req, res, next) => {
-    res.json({products: DUMMY_PRODUCTS})
+const getAllProducts = async (req, res, next) => {
+    let products
+    
+    try {
+        products = await Product.find()
+    } catch (err) {
+        const error = new HttpError('Fetching products failed.', 500)
+        return next(error)
+    } 
+
+    res.json({products: products.map(product => product.toObject({getters: true}))})
 }
 
-const getProductById = (req, res, next) => {
+const getProductById = async (req, res, next) => {
     const productId = req.params.pid
-    const product = DUMMY_PRODUCTS.find(p => {
-        return p.id === productId
-    })
-    if (!product) {
-        return next(new HttpError('Could not find a product for the product id.', 404))
+    let product
+
+    try {
+       product = await Product.findById(productId) 
+    } catch (err) {
+        const error = new HttpError('Something went wrong, could not find a product.', 500)
+        return next(error)
     }
-    res.json({product})
+    
+    if (!product) {
+        const error = new HttpError('Could not find a product for the provided id.', 404)
+        return next(error)
+    }
+
+    res.json({product: product.toObject({getters: true})})
+    // getters, add an id property to the created object
 }
 
 exports.getAllProducts = getAllProducts
