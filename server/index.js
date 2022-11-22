@@ -30,6 +30,6 @@ app.use((error, req, res, next) => {
 })
 
 mongoose
-    .connect('mongodb+srv://kfaber:katie1234@anime-store-api.4vd2etk.mongodb.net/ecommerce?retryWrites=true&w=majority')
+    .connect('mongodb+srv://kfaber:katie1234@anime-store-api.4vd2etk.mongodb.net/products?retryWrites=true&w=majority')
     .then(() => {app.listen(5000)})
     .catch(err => {console.log(err)})
