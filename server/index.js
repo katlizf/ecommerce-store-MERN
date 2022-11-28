@@ -1,5 +1,7 @@
 const express = require('express')
 const bodyParser = require('body-parser')
+const dotenv = require('dotenv')
+dotenv.config()
 const mongoose = require('mongoose')
 
 const productRoutes = require('./routes/product-routes')
@@ -33,6 +35,6 @@ app.use((error, req, res, next) => {
 })
 
 mongoose
-    .connect('mongodb+srv://kfaber:katie1234@anime-store-api.4vd2etk.mongodb.net/products?retryWrites=true&w=majority')
+    .connect(`mongodb+srv://${process.env.MONGO_USERNAME}:${process.env.MONGO_PASSWORD}@anime-store-api.4vd2etk.mongodb.net/products?retryWrites=true&w=majority`)
     .then(() => {app.listen(5000)})
     .catch(err => {console.log(err)})
