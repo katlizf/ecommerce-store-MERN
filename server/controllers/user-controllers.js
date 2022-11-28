@@ -51,7 +51,9 @@ const signup = async (req, res, next) => {
         aptEtc,
         city,
         state,
-        zipCode
+        zipCode,
+        products: []
+        // adding relationship between user and products
     })
 
     try {

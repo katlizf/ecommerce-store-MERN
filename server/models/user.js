@@ -13,7 +13,9 @@ const userSchema = new Schema({
     aptEtc: {type: String, require: true},
     city: {type: String, require: true},
     state: {type: String, require: true},
-    zipCode: {type: Number, require: true}
+    zipCode: {type: Number, require: true},
+    products: [{type: mongoose.Types.ObjectId, ref: 'Product'}]
+    // adding relationship between user and products
 })
 
 userSchema.plugin(uniqueValidator)
