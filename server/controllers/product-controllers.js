@@ -35,5 +35,26 @@ const getProductById = async (req, res, next) => {
     // getters, add an id property to the created object
 }
 
+const getProductsByUserId = async (req, res, next) => {
+    const userId = req.params.uid
+
+    let products
+    try {
+        products = await Product.find({user: userId})    
+    } catch (err) {
+        const error = new HttpError('Fetching plaes failed, please try again later.', 500)
+        return next(error)
+    }    
+
+    if (!products || products.length === 0) {
+        return next(
+            new HttpError('Could not find products for the provided user id.', 404)
+        )
+    }
+
+    res.json({products: products.map(product => product.toObject({getters: true}))})
+}
+
 exports.getAllProducts = getAllProducts
 exports.getProductById = getProductById
+exports.getProductsByUserId = getProductsByUserId

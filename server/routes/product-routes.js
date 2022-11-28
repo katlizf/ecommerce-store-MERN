@@ -9,5 +9,7 @@ router.get('/', productControllers.getAllProducts)
 
 router.get('/:pid', productControllers.getProductById)
 
+router.get('/user/:uid', productControllers.getProductsByUserId)
+
 
 module.exports = router
