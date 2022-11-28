@@ -39,7 +39,7 @@ function Auth() {
                 aptEtc: undefined,
                 city: undefined,
                 state: undefined,
-                ZipCode: undefined
+                zipCode: undefined
             }, formState.inputs.email.isValid && formState.inputs.password.isValid)
         } else {
             setFormData({
