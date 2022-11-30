@@ -72,7 +72,7 @@ const login = async (req, res, next) => {
     try {
         existingUser = await User.findOne({email})
     } catch (err) {
-        const error = new HttpError('Logging in failed, please try again later.')
+        const error = new HttpError('Logging in failed, please try again later.', 500)
         return next(error)
     }
 
