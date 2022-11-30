@@ -12,6 +12,7 @@ const HttpError = require('./models/http-error')
 const app = express()
 
 app.use('/api/products', productRoutes)
+// may need to separate apparel and collectable products
 
 app.use(bodyParser.json())
 
@@ -34,6 +35,6 @@ app.use((error, req, res, next) => {
 })
 
 mongoose
-    .connect(`mongodb+srv://${process.env.MONGO_USERNAME}:${process.env.MONGO_PASSWORD}@anime-store-api.4vd2etk.mongodb.net/products?retryWrites=true&w=majority`)
+    .connect(`mongodb+srv://${process.env.MONGO_USERNAME}:${process.env.MONGO_PASSWORD}@anime-store-api.4vd2etk.mongodb.net/ecommerce?retryWrites=true&w=majority`)
     .then(() => {app.listen(5000)})
     .catch(err => {console.log(err)})

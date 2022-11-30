@@ -10,7 +10,7 @@ const productsSchema = new Schema({
     anime: {type: String, required: true},
     image: {type: String, required: true},
     type: {type: String, required: true},
-    user: {type: mongoose.Types.ObjectId, ref: 'User'}
+    user: [{type: mongoose.Types.ObjectId, ref: 'User'}]
     // adding relationship between user and products
 })
 

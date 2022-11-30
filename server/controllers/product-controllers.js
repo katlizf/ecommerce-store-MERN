@@ -55,6 +55,8 @@ const getProductsByUserId = async (req, res, next) => {
     res.json({products: products.map(product => product.toObject({getters: true}))})
 }
 
+// need controller for user to add a product to their cart?
+
 exports.getAllProducts = getAllProducts
 exports.getProductById = getProductById
 exports.getProductsByUserId = getProductsByUserId
