@@ -1,3 +1,4 @@
+const mongoose = require('mongoose')
 const HttpError = require('../models/http-error')
 const Product = require('../models/product')
 
@@ -55,8 +56,40 @@ const getProductsByUserId = async (req, res, next) => {
     res.json({products: products.map(product => product.toObject({getters: true}))})
 }
 
+const deleteProduct = async (req, res, next) => {
+    const productId = req.params.pid
+
+    let product
+    try {
+        product = await Product.findById(productId).populate('user')
+    } catch (err) {
+        const error = new HttpError('Something went wrong, could not delete product.', 500)
+        return next(error)
+    }
+
+    if (!product) {
+        const error = new HttpError('Could not find product for this id.', 404)
+        return next(error)
+    }
+
+    try {
+        const sess = await mongoose.startSession()
+        sess.startTransaction()
+        product.remove({session: sess})
+        product.user.products.pull(product)
+        await product.user.save({session: sess})
+        await sess.commitTransaction()
+    } catch (err) {
+        const error = new HttpError('Something went wrong, could not delete product.', 500)
+        return next(error)
+    }
+
+    res.status(200).json({message: 'Deleted product'})
+}
+
 // need controller for user to add a product to their cart?
 
 exports.getAllProducts = getAllProducts
 exports.getProductById = getProductById
 exports.getProductsByUserId = getProductsByUserId
+exports.deleteProduct = deleteProduct
