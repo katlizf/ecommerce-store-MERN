@@ -8,6 +8,9 @@ import {VALIDATOR_REQUIRE, VALIDATOR_EMAIL, VALIDATOR_PASSWORD, VALIDATOR_MINLEN
 function Auth() {
 
     const auth = useContext(AuthContext)
+    const [isLoginMode, setIsLoginMode] = useState(true)
+    const [isLoading, setIsLoading] = useState(false)
+    const [error, setError] = useState(false)
 
     const [formState, userInputHandler, setFormData] = useForm({
         email: {
@@ -20,8 +23,6 @@ function Auth() {
         }
     }, false)
 
-    const [isLoginMode, setIsLoginMode] = useState(true)
-
     const authSubmitHandler = async e => {
         e.preventDefault()
 
@@ -29,6 +30,7 @@ function Auth() {
 
         } else {
             try {
+                setIsLoading(true)
                 const response = await fetch('http://localhost:5000/api/users/signup', {
                     method: 'POST',
                     headers: {
@@ -47,11 +49,14 @@ function Auth() {
                 })
                 const responseData = await response.json()
                 console.log(responseData)
+                setIsLoading(false)
+                auth.login()
             } catch (err) {
                 console.log(err)
+                setIsLoading(false)
+                setError(err.message || 'Something went wrong, please try again.')
             }  
         }
-        auth.login()
     }
 
     const switchModeHandler = () => {
