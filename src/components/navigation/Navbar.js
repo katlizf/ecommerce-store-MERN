@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom'
 import NavLinks from "./NavLinks"
 import SideNav from "./SideNav"
 import {useState} from 'react'
-import Backdrop from './Backdrop'
+import Backdrop from '../uiElements/Backdrop'
 
 function Navbar(props) {
 
