@@ -1,5 +1,7 @@
 import Input from "../../components/formElements/input/Input"
 import Button from '../../components/formElements/button/Button'
+import ErrorModal from '../../components/uiElements/ErrorModal'
+import LoadingSpinner from '../../components/uiElements/LoadingSpinner'
 import {AuthContext} from "../../context/AuthContext"
 import {useForm} from "../../hooks/FormHook"
 import {useState, useContext} from "react"
@@ -104,6 +106,7 @@ function Auth() {
 
     return (
         <div className="auth">
+            {isLoading && <LoadingSpinner asOverlay />}
           <form className="auth-form" onSubmit={authSubmitHandler}>
             {!isLoginMode && 
                 <div>
