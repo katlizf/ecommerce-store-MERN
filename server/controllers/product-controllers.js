@@ -2,7 +2,6 @@ const mongoose = require('mongoose')
 const HttpError = require('../models/http-error')
 const Product = require('../models/product')
 
-
 const getAllProducts = async (req, res, next) => {
     let products
     
@@ -38,8 +37,8 @@ const getProductById = async (req, res, next) => {
 
 const getProductsByUserId = async (req, res, next) => {
     const userId = req.params.uid
-
     let products
+
     try {
         products = await Product.find({user: userId})    
     } catch (err) {
@@ -58,8 +57,8 @@ const getProductsByUserId = async (req, res, next) => {
 
 const deleteProduct = async (req, res, next) => {
     const productId = req.params.pid
-
     let product
+
     try {
         product = await Product.findById(productId).populate('user')
     } catch (err) {
