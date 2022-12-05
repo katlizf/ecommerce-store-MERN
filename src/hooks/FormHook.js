@@ -23,6 +23,11 @@ const formReducer = (state, action) => {
                 },
                 isValid: formIsValid
             }
+        case 'SET_DATA':
+            return {
+                inputs: action.inputs,
+                isValid: action.formIsValid
+            }
         default:
             return state
     }
