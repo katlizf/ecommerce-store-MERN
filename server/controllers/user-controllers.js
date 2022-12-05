@@ -23,7 +23,7 @@ const signup = async (req, res, next) => {
         return next(new HttpError('Invalid inputs passed, please check your data.', 422))
     } 
 
-    const {fName, lName, email, password, address, aptEtc, city, state, zipCode} = req.body
+    const {fName, lName, email, password, address, city, state, zipCode} = req.body
     
     let existingUser
 
@@ -46,7 +46,6 @@ const signup = async (req, res, next) => {
         password,
         // need to encrypt password later
         address,
-        aptEtc,
         city,
         state,
         zipCode,
@@ -82,7 +81,6 @@ const login = async (req, res, next) => {
 
     res.json({message: 'Logged in!'})
 }
-
 
 exports.getUsers = getUsers
 exports.signup = signup
