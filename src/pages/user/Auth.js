@@ -22,10 +22,35 @@ function Auth() {
 
     const [isLoginMode, setIsLoginMode] = useState(true)
 
-    const authSubmitHandler = e => {
+    const authSubmitHandler = async e => {
         e.preventDefault()
-        console.log(formState.inputs)
-        // will later send to db
+
+        if (isLoginMode) {
+
+        } else {
+            try {
+                const response = await fetch('http://localhost:5000/api/users/signup', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        fName: formState.inputs.fName.value,
+                        lName: formState.inputs.lName.value,
+                        email: formState.inputs.email.value,
+                        password: formState.inputs.password.value,
+                        address: formState.inputs.address.value,
+                        city: formState.inputs.city.value,
+                        state: formState.inputs.state.value,
+                        zipCode: formState.inputs.zipCode.value
+                    })
+                })
+                const responseData = await response.json()
+                console.log(responseData)
+            } catch (err) {
+                console.log(err)
+            }  
+        }
         auth.login()
     }
 
@@ -36,7 +61,6 @@ function Auth() {
                 fName: undefined,
                 lName: undefined,
                 address: undefined,
-                aptEtc: undefined,
                 city: undefined,
                 state: undefined,
                 zipCode: undefined
@@ -55,10 +79,6 @@ function Auth() {
                 address: {
                     value: '',
                     isValid: false
-                },
-                aptEtc: {
-                    value: '',
-                    isValid: true
                 },
                 city: {
                     value: '',
@@ -99,15 +119,9 @@ function Auth() {
                     <Input
                         id="address"
                         type="text"
-                        label="Street Address: "
+                        label="Address: "
                         validators={[VALIDATOR_REQUIRE]}
                         errorText="Please enter your street address."
-                        onInput={userInputHandler} />
-                    <Input
-                        id="aptEtc"
-                        type="text"
-                        label="Apt, suite, etc. (optional): "
-                        placeholder='Apt. 123'
                         onInput={userInputHandler} />
                     <Input
                         id="city"
