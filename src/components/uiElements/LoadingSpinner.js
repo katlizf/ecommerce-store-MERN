@@ -1,0 +1,7 @@
+function LoadingSpinner(props) {
+    return (
+        <div className={`${props.asOverlay && 'loading-spinner-overlay'}`}>
+            <div className='lds-dual-ring'></div>
+        </div>
+    )
+}
