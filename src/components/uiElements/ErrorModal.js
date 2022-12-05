@@ -13,3 +13,5 @@ function ErrorModal(props) {
         </Modal>
     )
 }
+
+export default ErrorModal
