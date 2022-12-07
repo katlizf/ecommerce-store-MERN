@@ -2,17 +2,36 @@ const HttpError = require('../models/http-error')
 const User = require('../models/user')
 const {validationResult} = require('express-validator')
 
-const getUsers = async (req, res, next) => {
-    let users
+// const getUsers = async (req, res, next) => {
+//     let users
+
+//     try {
+//         users = await User.find()
+//     } catch (err) {
+//         const error = new HttpError('Fetching users failed.', 500)
+//         return next(error)
+//     }
+
+//     res.json({users: users.map(users => users.toObject({getters: true}))})
+// }
+
+const getUserById = async (req, res, next) => {
+    const userId = req.params.uid
+    let user
 
     try {
-        users = await User.find()
+        user = await User.findById(userId)
     } catch (err) {
-        const error = new HttpError('Fetching users failed.', 500)
+        const error = new HttpError('Something went wrong, could not find a user.', 500)
         return next(error)
     }
 
-    res.json({users: users.map(users => users.toObject({getters: true}))})
+    if(!user) {
+        const error = new HttpError('Could not find a user with that id.', 404)
+        return next(error)
+    }
+
+    res.json({user: user.toObject({getters: true})})
 }
 
 const signup = async (req, res, next) => {
@@ -82,6 +101,7 @@ const login = async (req, res, next) => {
     res.json({message: 'Logged in!'})
 }
 
-exports.getUsers = getUsers
+// exports.getUsers = getUsers
+exports.getUserById = getUserById
 exports.signup = signup
 exports.login = login
