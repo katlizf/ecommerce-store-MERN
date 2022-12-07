@@ -4,6 +4,7 @@ import ErrorModal from '../../components/uiElements/ErrorModal'
 import LoadingSpinner from '../../components/uiElements/LoadingSpinner'
 import {AuthContext} from "../../context/AuthContext"
 import {useForm} from "../../hooks/FormHook"
+import {useHttpClient} from "../../hooks/HttpHook"
 import React, {useState, useContext} from "react"
 import {VALIDATOR_REQUIRE, VALIDATOR_EMAIL, VALIDATOR_PASSWORD, VALIDATOR_MINLENGTH, VALIDATOR_MAXLENGTH} from '../../util/Validators'
 
@@ -11,8 +12,9 @@ function Auth() {
 
     const auth = useContext(AuthContext)
     const [isLoginMode, setIsLoginMode] = useState(true)
-    const [isLoading, setIsLoading] = useState(false)
-    const [error, setError] = useState(false)
+    const {isLoading, error, sendRequest, clearError} = useHttpClient()
+    const [userData, setUserData] = useState({})
+
 
     const [formState, userInputHandler, setFormData] = useForm({
         email: {
@@ -27,38 +29,26 @@ function Auth() {
 
     const authSubmitHandler = async e => {
         e.preventDefault()
-        setIsLoading(true)
 
         if (isLoginMode) {
             try {
-                const response = await fetch('http://localhost:5000/api/users/login', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        email: formState.inputs.email.value,
-                        password: formState.inputs.password.value
-                    })
-                })
-                const responseData = await response.json()
-                if (!response.ok) {
-                    throw new Error(responseData.message)
-                }
-                setIsLoading(false)
-                auth.login()
-            } catch (err) {
-                setIsLoading(false)
-                setError(err.message || 'Something went wrong, please try again.')
-            }
+               await sendRequest(
+                'http://localhost:5000/api/users/login',
+                'POST',
+                JSON.stringify({
+                    email: formState.inputs.email.value,
+                    password: formState.inputs.password.value
+                }),
+                {'Content-Type': 'application/json'}
+            )
+            auth.login()
+            } catch (err) {}
         } else {
             try {
-                const response = await fetch('http://localhost:5000/api/users/signup', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
+                await sendRequest(
+                    'http://localhost:5000/api/users/signup',
+                    'POST',
+                    JSON.stringify({
                         fName: formState.inputs.fName.value,
                         lName: formState.inputs.lName.value,
                         email: formState.inputs.email.value,
@@ -67,19 +57,11 @@ function Auth() {
                         city: formState.inputs.city.value,
                         state: formState.inputs.state.value,
                         zipCode: formState.inputs.zipCode.value
-                    })
-                })
-                const responseData = await response.json()
-                if (!response.ok) {
-                    throw new Error(responseData.message)
-                }
-                setIsLoading(false)
+                    }),
+                    {'Content-Type': 'application/json'} 
+                )
                 auth.login()
-            } catch (err) {
-                setIsLoading(false)
-                setError(err.message || 'Something went wrong, please try again.')
-            }
-
+            } catch (err) {}
         }
     }
 
@@ -126,14 +108,9 @@ function Auth() {
         setIsLoginMode(prevMode => !prevMode)
     }
 
-    const errorHandler = () => {
-        setError(null)
-        // null to clear it
-    }
-
     return (
         <React.Fragment>
-            <ErrorModal error={error} onClear={errorHandler} />
+            <ErrorModal error={error} onClear={clearError} />
             <div className="auth">
                 {isLoading && <LoadingSpinner asOverlay />}
                 <form className="auth-form" onSubmit={authSubmitHandler}>
