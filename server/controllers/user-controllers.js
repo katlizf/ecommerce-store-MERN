@@ -98,7 +98,7 @@ const login = async (req, res, next) => {
         return next(error)
     }
 
-    res.status(200).json({existingUser: existingUser.toObject({getters: true})})
+    res.status(200).json({user: existingUser.toObject({getters: true})})
 }
 
 // exports.getUsers = getUsers
