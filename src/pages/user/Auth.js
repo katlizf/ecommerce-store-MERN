@@ -13,7 +13,6 @@ function Auth() {
     const auth = useContext(AuthContext)
     const [isLoginMode, setIsLoginMode] = useState(true)
     const {isLoading, error, sendRequest, clearError} = useHttpClient()
-    const [userData, setUserData] = useState({})
 
 
     const [formState, userInputHandler, setFormData] = useForm({
@@ -32,7 +31,7 @@ function Auth() {
 
         if (isLoginMode) {
             try {
-               await sendRequest(
+               const response = await sendRequest(
                 'http://localhost:5000/api/users/login',
                 'POST',
                 JSON.stringify({
@@ -41,11 +40,11 @@ function Auth() {
                 }),
                 {'Content-Type': 'application/json'}
             )
-            auth.login()
+            auth.login(response.user.id)
             } catch (err) {}
         } else {
             try {
-                await sendRequest(
+                const response = await sendRequest(
                     'http://localhost:5000/api/users/signup',
                     'POST',
                     JSON.stringify({
@@ -60,7 +59,7 @@ function Auth() {
                     }),
                     {'Content-Type': 'application/json'} 
                 )
-                auth.login()
+                auth.login(response.user.id)
             } catch (err) {}
         }
     }
