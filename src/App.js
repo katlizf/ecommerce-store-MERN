@@ -11,13 +11,16 @@ import {AuthContext} from './context/AuthContext'
 function App() {
 
     const [isLoggedIn, setIsLoggedIn] = useState(false)
+    const [userId, setUserId] = useState(false)
 
-    const login = useCallback(() => {
+    const login = useCallback(uid => {
         setIsLoggedIn(true)
+        setUserId(uid)
     }, [])
 
     const logout = useCallback(() => {
         setIsLoggedIn(false)
+        setUserId(null)
     }, [])
 
     let routes
@@ -33,7 +36,7 @@ function App() {
                 <Route path='/Collectables'>
                     <Collectables />
                 </Route>
-                <Route path='/Profile'>
+                <Route path='/:userId/Profile'>
                     <Profile />
                 </Route>
                 <Redirect to='/' />
@@ -60,7 +63,7 @@ function App() {
     }
 
     return (
-        <AuthContext.Provider value={{isLoggedIn: isLoggedIn, login: login, logout: logout}}>
+        <AuthContext.Provider value={{isLoggedIn: isLoggedIn, userId: userId, login: login, logout: logout}}>
            <Navbar />
             {routes}
         </AuthContext.Provider>

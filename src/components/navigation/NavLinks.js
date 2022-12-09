@@ -24,7 +24,7 @@ function NavLinks() {
             }
             {auth.isLoggedIn && 
                 <li>
-                    <NavLink to='/Profile'> My Profile</NavLink>
+                    <NavLink to={`/${auth.userId}/Profile`}>Profile</NavLink>
                 </li>
             }
             {auth.isLoggedIn &&
