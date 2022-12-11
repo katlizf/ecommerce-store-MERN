@@ -18,17 +18,19 @@ function Profile() {
                 const response = await sendRequest(`http://localhost:5000/api/users/user/${userId}`)
 
                 setUserProfile(response.user)
-                console.log(response)
-                console.log(userProfile)
             } catch (err) { }
         }
         fetchUserProfile()
     }, [sendRequest, userId])
 
     return (
-        <div>
-            <UserDetails {...userProfile} />
-        </div>
+        <React.Fragment>
+            <ErrorModel error={error} onClear={clearError} />
+            {isLoading && <LoadingSpinner />}
+            <div>
+                <UserDetails {...userProfile} /> 
+            </div>            
+        </React.Fragment>
     )
 }
 
