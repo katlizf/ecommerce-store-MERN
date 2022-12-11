@@ -15,6 +15,32 @@ const getAllProducts = async (req, res, next) => {
     res.json({products: products.map(product => product.toObject({getters: true}))})
 }
 
+const getAllApparel = async (req, res, next) => {
+    let apparel
+
+    try {
+        apparel = await Product.find({"type": "Apparel"})
+    } catch (err) {
+        const error = new HttpError('Something went wrong, could not find apparel.', 500)
+        return next(error)
+    }
+
+    res.json({apparel: apparel.map(apparel => apparel.toObject({getters: true}))})
+}
+
+const getAllCollectables = async (req, res, next) => {
+    let collectables
+    
+    try {
+        collectables = await Product.find({"type": "Collectable"})
+    } catch (err) {
+        const error = new HttpError('Something went wrong, could not find collectables.', 500)
+        return next(error)
+    }
+
+    res.json({collectables: (await collectables).map(collectables => collectables.toObject({getters: true}))})
+}
+
 const getProductById = async (req, res, next) => {
     const productId = req.params.pid
     let product
@@ -89,6 +115,8 @@ const deleteProduct = async (req, res, next) => {
 // need controller for user to add a product to their cart?
 
 exports.getAllProducts = getAllProducts
+exports.getAllApparel = getAllApparel
+exports.getAllCollectables = getAllCollectables
 exports.getProductById = getProductById
 exports.getProductsByUserId = getProductsByUserId
 exports.deleteProduct = deleteProduct
