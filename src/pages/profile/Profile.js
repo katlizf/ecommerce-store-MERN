@@ -8,7 +8,7 @@ import UserDetails from '../../components/user/UserDetails'
 function Profile() {
 
     const [userProfile, setUserProfile] = useState()
-    const {isLoading, error, sendRequest, clearError} = useHttpClient
+    const {isLoading, error, sendRequest, clearError} = useHttpClient()
 
     const userId = useParams().userId
 
@@ -26,13 +26,9 @@ function Profile() {
     }, [sendRequest, userId])
 
     return (
-        <React.Fragment>
-            <ErrorModel error={error} onClear={clearError} />
-            {isLoading && <LoadingSpinner />}
-            <div>
-                <UserDetails {...userProfile} /> 
-            </div>            
-        </React.Fragment>
+        <div>
+            <UserDetails {...userProfile} />
+        </div>
     )
 }
 
