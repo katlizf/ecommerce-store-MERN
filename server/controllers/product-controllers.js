@@ -38,7 +38,7 @@ const getAllCollectables = async (req, res, next) => {
         return next(error)
     }
 
-    res.json({collectables: (await collectables).map(collectables => collectables.toObject({getters: true}))})
+    res.json({collectables: collectables.map(collectables => collectables.toObject({getters: true}))})
 }
 
 const getProductById = async (req, res, next) => {
