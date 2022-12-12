@@ -27,9 +27,11 @@ function Profile() {
         <React.Fragment>
             <ErrorModel error={error} onClear={clearError} />
             {isLoading && <LoadingSpinner />}
-            <div>
-                <UserDetails {...userProfile} /> 
-            </div>            
+            {!isLoading && userProfile &&
+                <div>
+                    <UserDetails {...userProfile} /> 
+                </div>
+            }          
         </React.Fragment>
     )
 }
