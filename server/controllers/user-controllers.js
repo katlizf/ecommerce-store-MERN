@@ -1,19 +1,7 @@
+import UserDetails from '../../src/components/user/UserDetails';
 const HttpError = require('../models/http-error')
 const User = require('../models/user')
 const {validationResult} = require('express-validator')
-
-// const getUsers = async (req, res, next) => {
-//     let users
-
-//     try {
-//         users = await User.find()
-//     } catch (err) {
-//         const error = new HttpError('Fetching users failed.', 500)
-//         return next(error)
-//     }
-
-//     res.json({users: users.map(users => users.toObject({getters: true}))})
-// }
 
 const getUserById = async (req, res, next) => {
     const userId = req.params.uid
@@ -101,7 +89,45 @@ const login = async (req, res, next) => {
     res.status(200).json({user: existingUser.toObject({getters: true})})
 }
 
-// exports.getUsers = getUsers
+const updateUserProfile = async (req, res, next) => {
+    const errors = validationResult(req)
+
+    if(!errors.isEmpty()) {
+        return next(new HttpError('Invalid inputs, please check your inputs.', 422))
+    }
+
+    const {fName, lName, email, password, address, city, state, zipCode} = req.body
+    const userId = req.params.uid
+
+    let user
+
+    try {
+        user = await User.findById(userId)
+    } catch (err) {
+        const error = new HttpError('Something went wrong, could not update information.', 500)
+        return next(error)
+    }
+
+    user.fName = fName
+    user.lName = lName
+    user.email = email
+    user.password = password
+    user.address = address
+    user.city = city
+    user.state = state
+    user.zipCode = zipCode
+
+    try {
+        await user.save()
+    } catch (err) {
+        const error = new HttpError('Something went wrong, could not update information.', 500)
+        return next(error)
+    }
+
+    res.status(200).json({user: user.toObject({getters: true})})
+}
+
 exports.getUserById = getUserById
 exports.signup = signup
 exports.login = login
+exports.updateUserProfile = updateUserProfile
