@@ -1,4 +1,3 @@
-import UserDetails from '../../src/components/user/UserDetails';
 const HttpError = require('../models/http-error')
 const User = require('../models/user')
 const {validationResult} = require('express-validator')
