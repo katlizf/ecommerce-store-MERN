@@ -11,11 +11,6 @@ const HttpError = require('./models/http-error')
 
 const app = express()
 
-app.use('/api/products', productRoutes)
-// may need to separate apparel and collectable products
-
-app.use(bodyParser.json())
-
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*')
     res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization')
@@ -23,6 +18,10 @@ app.use((req, res, next) => {
     next()
 })
 // for handling CORS errors
+
+app.use('/api/products', productRoutes)
+
+app.use(bodyParser.json())
 
 app.use('/api/users', userRoutes)
 
