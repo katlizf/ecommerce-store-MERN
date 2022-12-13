@@ -107,7 +107,7 @@ function UpdateUser() {
                 state: formState.inputs.state.value,
                 zipCode: formState.inputs.zipCode.value,
             }),
-            {'Content-Type': 'application/JSON'})
+            {'Content-Type': 'application/json'})
             
             history.push('/' + auth.userId + '/Profile')
             // redirct to Profile
@@ -219,7 +219,7 @@ function UpdateUser() {
                     <Button type='submit' disabled={!formState.isValid}>
                         Update Profile
                     </Button>
-                    <Button type='submit'>
+                    <Button to={`/${userId}/Profile`}>
                         Cancel
                     </Button>
                 </form>
