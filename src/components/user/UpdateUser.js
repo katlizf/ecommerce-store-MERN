@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState} from 'react'
+import {useContext, useEffect, useState} from 'react'
 import {useParams, useHistory} from 'react-router-dom'
 import {AuthContext} from '../../context/AuthContext'
 import {useHttpClient} from '../../hooks/HttpHook'
@@ -107,8 +107,8 @@ function UpdateUser() {
                 state: formState.inputs.state.value,
                 zipCode: formState.inputs.zipCode.value,
             }),
-            {'Content-Type': 'application/json'})
-            
+                {'Content-Type': 'application/json'})
+
             history.push('/' + auth.userId + '/Profile')
             // redirct to Profile
         } catch (err) { }
@@ -131,8 +131,7 @@ function UpdateUser() {
     }
 
     return (
-        <React.Fragment>
-            <PageContainer>
+        <PageContainer>
             <ErrorModal error={error} onClear={clearError} />
             {!isLoading && userProfile && (
                 <form onSubmit={profileUpdateSubmitHandler}>
@@ -144,7 +143,7 @@ function UpdateUser() {
                         validators={[VALIDATOR_REQUIRE()]}
                         errorText="Please enter your first name."
                         onInput={inputHandler}
-                        initialValue={userProfile.fName}
+                        value={userProfile.fName}
                         initialValid={true} />
                     <Input
                         id="lName"
@@ -154,7 +153,7 @@ function UpdateUser() {
                         validators={[VALIDATOR_REQUIRE()]}
                         errorText="Please enter your last name."
                         onInput={inputHandler}
-                        initialValue={userProfile.lName}
+                        value={userProfile.lName}
                         initialValid={true} />
                     <Input
                         id="email"
@@ -164,7 +163,7 @@ function UpdateUser() {
                         validators={[VALIDATOR_EMAIL()]}
                         errorText="Please enter a valid email address."
                         onInput={inputHandler}
-                        initialValue={userProfile.email}
+                        value={userProfile.email}
                         initialValid={true} />
                     <Input
                         id="password"
@@ -174,7 +173,7 @@ function UpdateUser() {
                         validators={[VALIDATOR_PASSWORD()]}
                         errorText="Your password must be at least 8 characters long and should include at least 1 uppercase, 1 lowercase, 1 number, & 1 special character."
                         onInput={inputHandler}
-                        initialValue={userProfile.password}
+                        value={userProfile.password}
                         initialValid={true} />
                     <Input
                         id="address"
@@ -184,7 +183,7 @@ function UpdateUser() {
                         validators={[VALIDATOR_REQUIRE()]}
                         errorText="Please enter your street address."
                         onInput={inputHandler}
-                        initialValue={userProfile.address}
+                        value={userProfile.address}
                         initialValid={true} />
                     <Input
                         id="city"
@@ -194,7 +193,7 @@ function UpdateUser() {
                         validators={[VALIDATOR_REQUIRE()]}
                         errorText="Please enter your city name."
                         onInput={inputHandler}
-                        initialValue={userProfile.city}
+                        value={userProfile.city}
                         initialValid={true} />
                     <Input
                         id="state"
@@ -204,7 +203,7 @@ function UpdateUser() {
                         validators={[VALIDATOR_MINLENGTH(2), VALIDATOR_MAXLENGTH(2)]}
                         errorText="Please enter your state's abbreviation (2 letters)."
                         onInput={inputHandler}
-                        initialValue={userProfile.state}
+                        value={userProfile.state}
                         initialValid={true} />
                     <Input
                         id="zipCode"
@@ -214,7 +213,7 @@ function UpdateUser() {
                         validators={[VALIDATOR_MINLENGTH(5)]}
                         errorText="Please enter your 5-digit zip code."
                         onInput={inputHandler}
-                        initialValue={userProfile.zipCode}
+                        value={userProfile.zipCode}
                         initialValid={true} />
                     <Button type='submit' disabled={!formState.isValid}>
                         Update Profile
@@ -224,8 +223,7 @@ function UpdateUser() {
                     </Button>
                 </form>
             )}
-            </PageContainer>
-        </React.Fragment>
+        </PageContainer>
     )
 }
 
