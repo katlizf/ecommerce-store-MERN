@@ -8,6 +8,7 @@ import Button from '../formElements/button/Button'
 import Input from '../formElements/input/Input'
 import ErrorModal from '../uiElements/ErrorModal'
 import LoadingSpinner from '../uiElements/LoadingSpinner'
+import PageContainer from '../pageContainer/PageContainer'
 
 function UpdateUser() {
 
@@ -49,7 +50,7 @@ function UpdateUser() {
     useEffect(() => {
         const fetchUserProfile = async () => {
             try {
-                const response = await sendRequest(`http://localhost:5000/api/users/${userId}`)
+                const response = await sendRequest(`http://localhost:5000/api/users/user/${userId}`)
                 setUserProfile(response.user)
                 setFormData(
                     {
@@ -96,11 +97,20 @@ function UpdateUser() {
         e.preventDefault()
 
         try {
-            await sendRequest(`http://localhost:5000/api/users/${userId}`, 'PATCH', JSON.stringify({
-
+            await sendRequest(`http://localhost:5000/api/users/user/${userId}`, 'PATCH', JSON.stringify({
+                fName: formState.inputs.fName.value,
+                lName: formState.inputs.lName.value,
+                email: formState.inputs.email.value,
+                password: formState.inputs.password.value,
+                address: formState.inputs.address.value,
+                city: formState.inputs.city.value,
+                state: formState.inputs.state.value,
+                zipCode: formState.inputs.zipCode.value,
             }),
-                {'Content-Type': 'application/JSON'})
-            history.push('/' + auth.userId + '/users')
+            {'Content-Type': 'application/JSON'})
+            
+            history.push('/' + auth.userId + '/Profile')
+            // redirct to Profile
         } catch (err) { }
     }
 
@@ -122,6 +132,7 @@ function UpdateUser() {
 
     return (
         <React.Fragment>
+            <PageContainer>
             <ErrorModal error={error} onClear={clearError} />
             {!isLoading && userProfile && (
                 <form onSubmit={profileUpdateSubmitHandler}>
@@ -133,7 +144,8 @@ function UpdateUser() {
                         validators={[VALIDATOR_REQUIRE()]}
                         errorText="Please enter your first name."
                         onInput={inputHandler}
-                    />
+                        initialValue={userProfile.fName}
+                        initialValid={true} />
                     <Input
                         id="lName"
                         element='input'
@@ -142,7 +154,8 @@ function UpdateUser() {
                         validators={[VALIDATOR_REQUIRE()]}
                         errorText="Please enter your last name."
                         onInput={inputHandler}
-                    />
+                        initialValue={userProfile.lName}
+                        initialValid={true} />
                     <Input
                         id="email"
                         element='input'
@@ -150,7 +163,9 @@ function UpdateUser() {
                         label="Email: "
                         validators={[VALIDATOR_EMAIL()]}
                         errorText="Please enter a valid email address."
-                        onInput={inputHandler} />
+                        onInput={inputHandler}
+                        initialValue={userProfile.email}
+                        initialValid={true} />
                     <Input
                         id="password"
                         element='input'
@@ -158,7 +173,9 @@ function UpdateUser() {
                         label="Password: "
                         validators={[VALIDATOR_PASSWORD()]}
                         errorText="Your password must be at least 8 characters long and should include at least 1 uppercase, 1 lowercase, 1 number, & 1 special character."
-                        onInput={inputHandler} />
+                        onInput={inputHandler}
+                        initialValue={userProfile.password}
+                        initialValid={true} />
                     <Input
                         id="address"
                         element='input'
@@ -166,7 +183,9 @@ function UpdateUser() {
                         label="Address: "
                         validators={[VALIDATOR_REQUIRE()]}
                         errorText="Please enter your street address."
-                        onInput={inputHandler} />
+                        onInput={inputHandler}
+                        initialValue={userProfile.address}
+                        initialValid={true} />
                     <Input
                         id="city"
                         element='input'
@@ -174,7 +193,9 @@ function UpdateUser() {
                         label="City: "
                         validators={[VALIDATOR_REQUIRE()]}
                         errorText="Please enter your city name."
-                        onInput={inputHandler} />
+                        onInput={inputHandler}
+                        initialValue={userProfile.city}
+                        initialValid={true} />
                     <Input
                         id="state"
                         element='input'
@@ -182,7 +203,9 @@ function UpdateUser() {
                         label="State: "
                         validators={[VALIDATOR_MINLENGTH(2), VALIDATOR_MAXLENGTH(2)]}
                         errorText="Please enter your state's abbreviation (2 letters)."
-                        onInput={inputHandler} />
+                        onInput={inputHandler}
+                        initialValue={userProfile.state}
+                        initialValid={true} />
                     <Input
                         id="zipCode"
                         element='input'
@@ -190,12 +213,18 @@ function UpdateUser() {
                         label="Zip Code: "
                         validators={[VALIDATOR_MINLENGTH(5)]}
                         errorText="Please enter your 5-digit zip code."
-                        onInput={inputHandler} />
+                        onInput={inputHandler}
+                        initialValue={userProfile.zipCode}
+                        initialValid={true} />
                     <Button type='submit' disabled={!formState.isValid}>
                         Update Profile
                     </Button>
+                    <Button type='submit'>
+                        Cancel
+                    </Button>
                 </form>
             )}
+            </PageContainer>
         </React.Fragment>
     )
 }
