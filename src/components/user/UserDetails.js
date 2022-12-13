@@ -25,7 +25,7 @@ function UserDetails({id, fName, lName, email, password, address, city, state, z
             <h2>{state}</h2>
             <h2>{zipCode}</h2>
             <div>
-                <Button to={`/users/${id}`}>Edit</Button>
+                <Button to={`/users/user/${id}`}>Edit</Button>
                 {/* <Button onClick={deleteWarningHandler}>Delete</Button> */}
             </div>            
         </PageContainer>
