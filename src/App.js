@@ -7,6 +7,7 @@ import Home from './pages/home/Home'
 import Profile from './pages/profile/Profile'
 import Auth from './pages/user/Auth'
 import {AuthContext} from './context/AuthContext'
+import UpdateUser from './components/user/UpdateUser'
 
 function App() {
 
@@ -38,6 +39,9 @@ function App() {
                 </Route>
                 <Route path='/:userId/Profile'>
                     <Profile />
+                </Route>
+                <Route path='/users/user/:userId'>
+                    <UpdateUser />
                 </Route>
                 <Redirect to='/' />
             </Switch>
