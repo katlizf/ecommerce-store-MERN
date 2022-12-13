@@ -20,7 +20,9 @@ router.post('/signup',
     ],
     usersController.signup)
 
-router.patch('/:uid', 
+router.post('/login', usersController.login)
+
+router.patch('/user/:uid', 
     [
         check('fName').not().isEmpty().withMessage('First name is required'),
         check('lName').not().isEmpty().withMessage('Last name is required'),
@@ -32,7 +34,5 @@ router.patch('/:uid',
         check('zipCode').isLength({min: 5, max: 5}).withMessage('Zip code should be five digits long')
     ],
     usersController.updateUserProfile)
-
-router.post('/login', usersController.login)
 
 module.exports = router
