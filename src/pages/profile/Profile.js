@@ -1,9 +1,11 @@
-import React, {useEffect, useState} from 'react'
+import {useEffect, useState} from 'react'
 import {useParams} from 'react-router-dom'
 import {useHttpClient} from '../../hooks/HttpHook'
 import ErrorModel from '../../components/uiElements/ErrorModal'
 import LoadingSpinner from '../../components/uiElements/LoadingSpinner'
 import UserDetails from '../../components/user/UserDetails'
+import Avatar from '../../components/uiElements/Avatar'
+import PageContainer from '../../components/pageContainer/PageContainer'
 
 function Profile() {
 
@@ -24,15 +26,16 @@ function Profile() {
     }, [sendRequest, userId])
 
     return (
-        <React.Fragment>
+        <PageContainer>
             <ErrorModel error={error} onClear={clearError} />
             {isLoading && <LoadingSpinner />}
             {!isLoading && userProfile &&
                 <div>
+                    <Avatar {...userProfile}/>
                     <UserDetails {...userProfile} /> 
                 </div>
             }          
-        </React.Fragment>
+        </PageContainer>
     )
 }
 
