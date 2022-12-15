@@ -14,7 +14,7 @@ function UserDetails({id, fName, lName, email, password, address, city, state, z
     const [showConfirmModal, setShowConfirmModal] = useState(false)
 
     return (
-        <PageContainer>
+        <React.Fragment>
             <h1>Profile</h1>
             <h2>{fName}</h2>
             <h2>{lName}</h2>
@@ -28,7 +28,7 @@ function UserDetails({id, fName, lName, email, password, address, city, state, z
                 <Button to={`/users/user/${id}`}>Edit</Button>
                 {/* <Button onClick={deleteWarningHandler}>Delete</Button> */}
             </div>            
-        </PageContainer>
+        </React.Fragment>
     )
 }
 
