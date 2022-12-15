@@ -1,6 +1,7 @@
 const HttpError = require('../models/http-error')
 const User = require('../models/user')
 const {validationResult} = require('express-validator')
+const {default: mongoose} = require('mongoose')
 
 const getUserById = async (req, res, next) => {
     const userId = req.params.uid
@@ -126,7 +127,36 @@ const updateUserProfile = async (req, res, next) => {
     res.status(200).json({user: user.toObject({getters: true})})
 }
 
+const deleteUser = async (req, res, next) => {
+    const userId = req.params.uid
+
+    let user
+    try {
+        user = await User.findById(userId)
+    } catch (err) {
+        const error = new HttpError('Something went wrong, could not delete user.', 500)
+        return next(error)
+    }
+
+    if(!user) {
+        const error = new HttpError('Could not find use for this id.', 404)
+        return next(error)
+    }
+
+    try {
+        const sess = await mongoose.startSession()
+        sess.startTransaction()
+        await user.remove({session: sess})
+        await sess.commitTransaction()
+    } catch (err) {
+        const error = new HttpError('Something went wrong, could not delete uses.', 500)
+        return next(error)
+    }
+    res.status(200).json({message: 'Deleted user.'})
+}
+
 exports.getUserById = getUserById
 exports.signup = signup
 exports.login = login
 exports.updateUserProfile = updateUserProfile
+exports.deleteUser = deleteUser

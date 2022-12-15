@@ -35,4 +35,6 @@ router.patch('/user/:uid',
     ],
     usersController.updateUserProfile)
 
+router.delete('/user/:uid', usersController.deleteUser)
+
 module.exports = router
