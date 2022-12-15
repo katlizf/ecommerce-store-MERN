@@ -1,9 +1,10 @@
-function Avatar(props) {
+function Avatar({fName, image}) {
+    console.log(image)
     return (
-        <div className={`avatar ${props.className}`}>
+        <div >
             <img
-                src={props.image}
-                alt={props.alt}
+                src={image}
+                alt={fName}
             />
         </div>
     )
