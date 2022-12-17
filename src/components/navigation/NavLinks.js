@@ -17,9 +17,6 @@ function NavLinks() {
             <li>
                 <NavLink to='/Collectables'>Collectables</NavLink>
             </li>
-            <li>
-                <i class="icon-shopping-cart"></i>
-            </li>
             {!auth.isLoggedIn &&
                 <li>
                     <NavLink to='/Auth'>Login</NavLink>
@@ -40,3 +37,9 @@ function NavLinks() {
 }
 
 export default NavLinks
+
+
+
+// <li>
+// <i className="icon-shopping-cart"></i>
+// </li>

@@ -3,6 +3,7 @@ import {useHttpClient} from '../../hooks/HttpHook'
 import Products from "../../components/products/Products"
 import LoadingSpinner from '../../components/uiElements/LoadingSpinner'
 import ErrorModal from '../../components/uiElements/ErrorModal'
+import PageContainer from '../../components/pageContainer/PageContainer'
 
 function Collectables() {
 
@@ -21,7 +22,7 @@ function Collectables() {
     }, [sendRequest])
 
     return (
-        <React.Fragment>
+        <PageContainer>
             <ErrorModal error={error} onClear={clearError} />
             {isLoading && <LoadingSpinner />}
             {!isLoading && allCollectables &&
@@ -29,7 +30,7 @@ function Collectables() {
                     <Products items={allCollectables} />
                 </div>            
             }
-        </React.Fragment>
+        </PageContainer>
     )
 }
 

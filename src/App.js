@@ -1,12 +1,12 @@
 import {useState, useCallback} from 'react'
 import {Route, Redirect, Switch} from 'react-router-dom'
+import {AuthContext} from './context/AuthContext'
 import Navbar from './components/navigation/Navbar'
 import Apparel from './pages/apparel/Apparel'
 import Collectables from './pages/collectables/Collectables'
 import Home from './pages/home/Home'
 import Profile from './pages/profile/Profile'
 import Auth from './pages/user/Auth'
-import {AuthContext} from './context/AuthContext'
 import UpdateUser from './components/user/UpdateUser'
 
 function App() {

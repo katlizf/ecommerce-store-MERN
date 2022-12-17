@@ -1,5 +1,4 @@
 import Product from "./product/Product"
-import PageContainer from "../pageContainer/PageContainer"
 
 function Products(props) {
 
@@ -12,7 +11,7 @@ function Products(props) {
     }
 
     return (
-        <PageContainer>
+        <div>
             <ul>
               {props.items.map(product => (
                     <Product
@@ -25,7 +24,7 @@ function Products(props) {
                     />
                 ))}  
             </ul>
-        </PageContainer>
+        </div>
     )
 }
 

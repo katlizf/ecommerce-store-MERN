@@ -1,4 +1,4 @@
-import {useContext, useEffect, useState} from 'react'
+import React, {useContext, useEffect, useState} from 'react'
 import {useParams, useHistory} from 'react-router-dom'
 import {AuthContext} from '../../context/AuthContext'
 import {useHttpClient} from '../../hooks/HttpHook'
@@ -8,7 +8,6 @@ import Button from '../formElements/button/Button'
 import Input from '../formElements/input/Input'
 import ErrorModal from '../uiElements/ErrorModal'
 import LoadingSpinner from '../uiElements/LoadingSpinner'
-import PageContainer from '../pageContainer/PageContainer'
 
 function UpdateUser() {
 
@@ -131,7 +130,7 @@ function UpdateUser() {
     }
 
     return (
-        <PageContainer>
+        <React.Fragment>
             <ErrorModal error={error} onClear={clearError} />
             {!isLoading && userProfile && (
                 <form onSubmit={profileUpdateSubmitHandler}>
@@ -223,7 +222,7 @@ function UpdateUser() {
                     </Button>
                 </form>
             )}
-        </PageContainer>
+        </React.Fragment>
     )
 }
 

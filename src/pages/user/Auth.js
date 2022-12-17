@@ -1,12 +1,14 @@
-import Input from "../../components/formElements/input/Input"
-import Button from '../../components/formElements/button/Button'
-import ErrorModal from '../../components/uiElements/ErrorModal'
-import LoadingSpinner from '../../components/uiElements/LoadingSpinner'
 import {AuthContext} from "../../context/AuthContext"
 import {useForm} from "../../hooks/FormHook"
 import {useHttpClient} from "../../hooks/HttpHook"
 import React, {useState, useContext} from "react"
 import {VALIDATOR_REQUIRE, VALIDATOR_EMAIL, VALIDATOR_PASSWORD, VALIDATOR_MINLENGTH, VALIDATOR_MAXLENGTH} from '../../util/Validators'
+import Input from "../../components/formElements/input/Input"
+import Button from '../../components/formElements/button/Button'
+import ErrorModal from '../../components/uiElements/ErrorModal'
+import LoadingSpinner from '../../components/uiElements/LoadingSpinner'
+import PageContainer from '../../components/pageContainer/PageContainer'
+
 
 function Auth() {
 
@@ -108,7 +110,7 @@ function Auth() {
     }
 
     return (
-        <React.Fragment>
+        <PageContainer>
             <ErrorModal error={error} onClear={clearError} />
             <div className="auth">
                 {isLoading && <LoadingSpinner asOverlay />}
@@ -177,7 +179,7 @@ function Auth() {
                 </form>
                 <Button inverse onClick={switchModeHandler}>Switch To {!isLoginMode ? 'Login' : 'Register'}</Button>
             </div>
-        </React.Fragment>
+        </PageContainer>
 
     )
 }
