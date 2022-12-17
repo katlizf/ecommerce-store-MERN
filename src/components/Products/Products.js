@@ -12,7 +12,7 @@ function Products(props) {
 
     return (
         <div>
-            <ul>
+            <ul  className="products">
               {props.items.map(product => (
                     <Product
                         key={product.id}

@@ -8,18 +8,23 @@
 @import './pages/user/_auth';
 
 
-// components
 @import './components/formElements/button/_button';
 @import './components/formElements/input/_input';
+
 @import './components/navigation/_mainHeader';
 @import './components/navigation/_navbar';
 @import './components/navigation/_navLinks';
 @import './components/navigation/_sideNav';
+
 @import './components/pageContainer/_pageContainer';
+
 @import './components/uiElements/_backdrop';
 @import './components//uiElements/_modal';
 @import './components/uiElements/_loadingSpinner';
 @import './components/uiElements/_avatar';
+
+@import './components/products/product/_product';
+@import './components/products/_products';
 
 
 * {
