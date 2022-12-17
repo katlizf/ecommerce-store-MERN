@@ -1,11 +1,11 @@
-import MainHeader from "./MainHeader"
+import {useState} from 'react'
 import {Link} from 'react-router-dom'
+import MainHeader from "./MainHeader"
 import NavLinks from "./NavLinks"
 import SideNav from "./SideNav"
-import {useState} from 'react'
 import Backdrop from '../uiElements/Backdrop'
 
-function Navbar(props) {
+function Navbar() {
 
     const [sideNavOpen, setSideNavOpen] = useState(false)
 

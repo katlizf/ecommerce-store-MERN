@@ -1,7 +1,9 @@
-import ReactDOM from 'react-dom'
 import {CSSTransition} from 'react-transition-group'
+import ReactDOM from 'react-dom'
+
 
 function SideNav(props) {
+
     const content = (
         <CSSTransition
             in={props.show}
@@ -15,7 +17,10 @@ function SideNav(props) {
             </aside>
         </CSSTransition>
     )
-    return ReactDOM.createPortal(content, document.getElementById('side-nav-hook'))
+
+    return (
+        ReactDOM.createPortal(content, document.getElementById('side-nav-hook'))
+    )
 }
 
 export default SideNav

@@ -107,7 +107,6 @@ function UpdateUser() {
                 zipCode: formState.inputs.zipCode.value,
             }),
                 {'Content-Type': 'application/json'})
-
             history.push('/' + auth.userId + '/Profile')
             // redirct to Profile
         } catch (err) { }
