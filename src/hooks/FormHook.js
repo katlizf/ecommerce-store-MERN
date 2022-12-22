@@ -41,7 +41,7 @@ export const useForm = (initialInputs, initialFormValidity) => {
         // whether the entire form is valid 
     })
 
-    const userInputHandler = useCallback((id, value, isValid) => {
+    const inputHandler = useCallback((id, value, isValid) => {
         dispatch({
             type: 'INPUT_CHANGE',
             value: value,
@@ -58,5 +58,5 @@ export const useForm = (initialInputs, initialFormValidity) => {
     }, [])
     // using useCallback to prevent an infinite loop with the useEffect in the input component
 
-    return [formState, userInputHandler, setFormData]
+    return [formState, inputHandler, setFormData]
 }
