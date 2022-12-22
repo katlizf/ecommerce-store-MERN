@@ -56,6 +56,7 @@ const signup = async (req, res, next) => {
         city,
         state,
         zipCode,
+        image: 'https://sbcf.fr/wp-content/uploads/2018/03/sbcf-default-avatar.png',
         products: []
         // adding relationship between user and products
     })
