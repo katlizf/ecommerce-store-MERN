@@ -1,23 +1,15 @@
 import {useEffect, useState} from 'react'
 import {useParams} from 'react-router-dom'
 import {useHttpClient} from '../../hooks/HttpHook'
-import {useForm} from '../../hooks/FormHook'
 import ErrorModel from '../../components/uiElements/ErrorModal'
 import LoadingSpinner from '../../components/uiElements/LoadingSpinner'
 import UserDetails from '../../components/user/UserDetails'
 import PageContainer from '../../components/pageContainer/PageContainer'
-import ImageUpload from '../../components/formElements/ImageUpload'
 
 function Profile() {
 
     const [userProfile, setUserProfile] = useState()
     const {isLoading, error, sendRequest, clearError} = useHttpClient()
-
-    const [inputHandler] = useForm({
-        image: {
-            value: ''
-        }
-    })
 
     const userId = useParams().userId
 
@@ -38,7 +30,6 @@ function Profile() {
             {isLoading && <LoadingSpinner />}
             {!isLoading && userProfile &&
                 <div>
-                    <ImageUpload id="image" onInput={inputHandler}/>
                     <UserDetails {...userProfile} /> 
                 </div>
             }          
