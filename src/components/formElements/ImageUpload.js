@@ -48,7 +48,7 @@ function ImageUpload(props) {
             <div className="image-upload">
                 <div className="image-upload-preview">
                     {previewUrl && <img src={previewUrl} alt="Preview" />}
-                    {!previewUrl && <img src='../../../public/images/default-avatar.png' alt="Default Avatar" />}
+                    {!previewUrl && <img src={props.image} alt={props.fName} />}
                 </div>
                 <Button type="button" onClick={pickImageHandler}>Pick Image</Button>
             </div>
