@@ -8,6 +8,8 @@ import Button from '../formElements/Button'
 import Input from '../formElements/Input'
 import ErrorModal from '../uiElements/ErrorModal'
 import LoadingSpinner from '../uiElements/LoadingSpinner'
+import PageContainer from '../pageContainer/PageContainer'
+import ImageUpload from '../formElements/ImageUpload'
 
 function UpdateUser() {
 
@@ -42,6 +44,10 @@ function UpdateUser() {
             zipCode: {
                 value: '',
                 isValid: false
+            },
+            image: {
+                value: '',
+                isValid: true
             }
         }, false
     )
@@ -84,6 +90,10 @@ function UpdateUser() {
                         zipCode: {
                             value: response.user.zipCode,
                             isValid: true
+                        },
+                        image: {
+                            value: response.user.image,
+                            isValid: true
                         }
                     }, true
                 )
@@ -105,6 +115,7 @@ function UpdateUser() {
                 city: formState.inputs.city.value,
                 state: formState.inputs.state.value,
                 zipCode: formState.inputs.zipCode.value,
+                image: formState.inputs.image.value
             }),
                 {'Content-Type': 'application/json'})
             history.push('/' + auth.userId + '/Profile')
@@ -129,10 +140,13 @@ function UpdateUser() {
     }
 
     return (
-        <React.Fragment>
+        <PageContainer>
             <ErrorModal error={error} onClear={clearError} />
             {!isLoading && userProfile && (
                 <form onSubmit={profileUpdateSubmitHandler}>
+                    <ImageUpload
+                        {...userProfile}
+                        onInput={inputHandler} />
                     <Input
                         id="fName"
                         element='input'
@@ -221,7 +235,7 @@ function UpdateUser() {
                     </Button>
                 </form>
             )}
-        </React.Fragment>
+        </PageContainer>
     )
 }
 
