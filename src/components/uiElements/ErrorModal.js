@@ -1,5 +1,5 @@
 import Modal from "./Modal"
-import Button from '../formElements/button/Button'
+import Button from '../formElements/Button'
 
 function ErrorModal(props) {
     return (
