@@ -5,7 +5,6 @@ import {useForm} from '../../hooks/FormHook'
 import ErrorModel from '../../components/uiElements/ErrorModal'
 import LoadingSpinner from '../../components/uiElements/LoadingSpinner'
 import UserDetails from '../../components/user/UserDetails'
-import Avatar from '../../components/uiElements/Avatar'
 import PageContainer from '../../components/pageContainer/PageContainer'
 import ImageUpload from '../../components/formElements/ImageUpload'
 
@@ -40,7 +39,6 @@ function Profile() {
             {!isLoading && userProfile &&
                 <div>
                     <ImageUpload id="image" onInput={inputHandler}/>
-                    <Avatar {...userProfile}/>
                     <UserDetails {...userProfile} /> 
                 </div>
             }          
