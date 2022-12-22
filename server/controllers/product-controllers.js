@@ -66,7 +66,7 @@ const getProductsByUserId = async (req, res, next) => {
     let products
 
     try {
-        products = await Product.find({user: userId})    
+        products = await Product.filter({user: userId})    
     } catch (err) {
         const error = new HttpError('Fetching plaes failed, please try again later.', 500)
         return next(error)
