@@ -1,5 +1,6 @@
 const express = require('express')
 const {check} = require('express-validator')
+const fileUpload = require('../middleware/file-upload')
 
 const usersController = require('../controllers/user-controllers')
 
@@ -22,7 +23,7 @@ router.post('/signup',
 
 router.post('/login', usersController.login)
 
-router.patch('/user/:uid', 
+router.patch('/user/:uid', fileUpload.single('image'),
     [
         check('fName').not().isEmpty().withMessage('First name is required'),
         check('lName').not().isEmpty().withMessage('Last name is required'),
@@ -31,7 +32,7 @@ router.patch('/user/:uid',
         check('address').not().isEmpty().withMessage('Address is required'),
         check('city').not().isEmpty().withMessage('City is required'),
         check('state').isLength({min: 2, max: 2}).withMessage('State should be a 2 letter abbreviation'),
-        check('zipCode').isLength({min: 5, max: 5}).withMessage('Zip code should be five digits long')
+        check('zipCode').isLength({min: 5, max: 5}).withMessage('Zip code should be five digits long'),
     ],
     usersController.updateUserProfile)
 
