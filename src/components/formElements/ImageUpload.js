@@ -1,16 +1,38 @@
-import {useRef} from 'react'
+import {useEffect, useRef, useState} from 'react'
 import Button from "./Button"
 
 function ImageUpload(props) {
 
+    const [file, setFile] = useState()
+    const [previewUrl, setPreviewUrl] = useState()
     const filePickerRef = useRef()
+
+    useEffect(() => {
+        if (!file) {
+            return
+        }
+        const fileReader = new FileReader()
+        fileReader.onload = () => {
+            setPreviewUrl(fileReader.result)
+        }
+        fileReader.readAsDataURL(file)
+        // create a url I can output
+
+    }, [file])
 
     const pickImageHandler = () => {
         filePickerRef.current.click()
     }
 
     const pickHandler = e => {
-        console.log(e.target)
+        let pickedFile
+
+        if (e.target.files & e.target.files.length === 1) {
+            pickedFile = e.target.files[0]
+            setFile(pickedFile)
+            return
+        }
+        props.onInput(props.id, pickedFile)
     }
 
     return (
@@ -25,7 +47,8 @@ function ImageUpload(props) {
             />
             <div className="image-upload">
                 <div className="image-upload-preview">
-                    <img src="" alt="preview" />
+                    {previewUrl && <img src={previewUrl} alt="Preview" />}
+                    {!previewUrl && <img src='../../../public/images/default-avatar.png' alt="Default Avatar" />}
                 </div>
                 <Button type="button" onClick={pickImageHandler}>Pick Image</Button>
             </div>
