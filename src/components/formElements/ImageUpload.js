@@ -17,7 +17,6 @@ function ImageUpload(props) {
         }
         fileReader.readAsDataURL(file)
         // create a url I can output
-
     }, [file])
 
     const pickImageHandler = () => {
@@ -27,7 +26,7 @@ function ImageUpload(props) {
     const pickHandler = e => {
         let pickedFile
 
-        if (e.target.files & e.target.files.length === 1) {
+        if (e.target.files && e.target.files.length === 1) {
             pickedFile = e.target.files[0]
             setFile(pickedFile)
             return
@@ -48,9 +47,11 @@ function ImageUpload(props) {
             <div className="image-upload">
                 <div className="image-upload-preview">
                     {previewUrl && <img src={previewUrl} alt="Preview" />}
-                    {!previewUrl && <img src={props.image} alt={props.fName} />}
+                    {!previewUrl && <img src='../../../public/iamges/default-avatar.png' alt={props.fName} />}
                 </div>
-                <Button type="button" onClick={pickImageHandler}>Pick Image</Button>
+                <Button type="button" onClick={pickImageHandler}>
+                    Pick Image
+                </Button>
             </div>
         </div>
     )
