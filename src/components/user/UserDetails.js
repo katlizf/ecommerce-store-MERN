@@ -55,7 +55,7 @@ function UserDetails({id, fName, lName, email, password, address, city, state, z
                 <p>Do you want to proceed and delete your account? Please note that this cannot be undone.</p>
             </Modal>
             <h1>Profile</h1>
-            <Avatar image={image} alt={fName}/>
+            <Avatar id='profile-pic' image={`http://localhost:5000/${image}`} alt={fName} />
             <h2>{fName}</h2>
             <h2>{lName}</h2>
             <h2>{email}</h2>
