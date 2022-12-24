@@ -145,6 +145,7 @@ function UpdateUser() {
             {!isLoading && userProfile && (
                 <form onSubmit={profileUpdateSubmitHandler}>
                     <ImageUpload
+                        id='image'
                         {...userProfile}
                         onInput={inputHandler} />
                     <Input
