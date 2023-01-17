@@ -19,10 +19,6 @@ function ImageUpload(props) {
         // create a url I can output
     }, [file])
 
-    const pickImageHandler = () => {
-        filePickerRef.current.click()
-    }
-
     const pickHandler = e => {
         let pickedFile
 
@@ -32,6 +28,10 @@ function ImageUpload(props) {
             return
         }
         props.onInput(props.id, pickedFile)
+    }
+
+    const pickImageHandler = () => {
+        filePickerRef.current.click()
     }
 
     return (
@@ -47,7 +47,7 @@ function ImageUpload(props) {
             <div className="image-upload">
                 <div className="image-upload-preview">
                     {previewUrl && <img src={previewUrl} alt="Preview" />}
-                    {!previewUrl && <img src='../../../public/iamges/default-avatar.png' alt={props.fName} />}
+                    {!previewUrl && <img src={props.image} alt={props.fName} />}
                 </div>
                 <Button type="button" onClick={pickImageHandler}>
                     Pick Image
