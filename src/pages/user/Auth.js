@@ -8,6 +8,7 @@ import Button from '../../components/formElements/Button'
 import ErrorModal from '../../components/uiElements/ErrorModal'
 import LoadingSpinner from '../../components/uiElements/LoadingSpinner'
 import PageContainer from '../../components/pageContainer/PageContainer'
+import ImageUpload from "../../components/formElements/ImageUpload"
 
 
 function Auth() {
@@ -28,44 +29,6 @@ function Auth() {
         }
     }, false)
 
-    const authSubmitHandler = async e => {
-        e.preventDefault()
-
-        if (isLoginMode) {
-            try {
-               const response = await sendRequest(
-                'http://localhost:5000/api/users/login',
-                'POST',
-                JSON.stringify({
-                    email: formState.inputs.email.value,
-                    password: formState.inputs.password.value
-                }),
-                {'Content-Type': 'application/json'}
-            )
-            auth.login(response.user.id)
-            } catch (err) {}
-        } else {
-            try {
-                const response = await sendRequest(
-                    'http://localhost:5000/api/users/signup',
-                    'POST',
-                    JSON.stringify({
-                        fName: formState.inputs.fName.value,
-                        lName: formState.inputs.lName.value,
-                        email: formState.inputs.email.value,
-                        password: formState.inputs.password.value,
-                        address: formState.inputs.address.value,
-                        city: formState.inputs.city.value,
-                        state: formState.inputs.state.value,
-                        zipCode: formState.inputs.zipCode.value
-                    }),
-                    {'Content-Type': 'application/json'} 
-                )
-                auth.login(response.user.id)
-            } catch (err) {}
-        }
-    }
-
     const switchModeHandler = () => {
         if (!isLoginMode) {
             setFormData({
@@ -75,7 +38,8 @@ function Auth() {
                 address: undefined,
                 city: undefined,
                 state: undefined,
-                zipCode: undefined
+                zipCode: undefined,
+                image: undefined
             }, formState.inputs.email.isValid && formState.inputs.password.isValid)
         } else {
             setFormData({
@@ -103,10 +67,53 @@ function Auth() {
                 zipCode: {
                     value: '',
                     isValid: false
+                },
+                image: {
+                    value: '',
+                    isValid: true
                 }
             }, false)
         }
         setIsLoginMode(prevMode => !prevMode)
+    }
+
+    const authSubmitHandler = async e => {
+        e.preventDefault()
+
+        if (isLoginMode) {
+            try {
+                const response = await sendRequest(
+                    'http://localhost:5000/api/users/login',
+                    'POST',
+                    JSON.stringify({
+                        email: formState.inputs.email.value,
+                        password: formState.inputs.password.value
+                    }),
+                    {'Content-Type': 'application/json'}
+                )
+                auth.login(response.user.id)
+            } catch (err) { }
+        } else {
+            try {
+                const response = await sendRequest(
+                    'http://localhost:5000/api/users/signup',
+                    'POST',
+                    JSON.stringify({
+                        fName: formState.inputs.fName.value,
+                        lName: formState.inputs.lName.value,
+                        email: formState.inputs.email.value,
+                        password: formState.inputs.password.value,
+                        address: formState.inputs.address.value,
+                        city: formState.inputs.city.value,
+                        state: formState.inputs.state.value,
+                        zipCode: formState.inputs.zipCode.value,
+                        image: formState.inputs.image.value
+                    }),
+                    {'Content-Type': 'application/json'}
+                )
+                auth.login(response.user.id)
+            } catch (err) { }
+        }
     }
 
     return (
@@ -117,6 +124,10 @@ function Auth() {
                 <form className="auth-form" onSubmit={authSubmitHandler}>
                     {!isLoginMode &&
                         <div>
+                            <ImageUpload
+                            id='image'
+                            onInput={inputHandler}
+                            required='false' />
                             <Input
                                 id="fName"
                                 type="text"
