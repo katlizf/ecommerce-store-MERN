@@ -1,7 +1,7 @@
 const HttpError = require('../models/http-error')
 const User = require('../models/user')
 const {validationResult} = require('express-validator')
-const {default: mongoose} = require('mongoose')
+const mongoose = require('mongoose')
 
 const getUserById = async (req, res, next) => {
     const userId = req.params.uid
@@ -56,6 +56,7 @@ const signup = async (req, res, next) => {
         city,
         state,
         zipCode,
+        image: req.file.path,
         products: []
         // adding relationship between user and products
     })
@@ -96,7 +97,7 @@ const updateUserProfile = async (req, res, next) => {
         return next(new HttpError('Invalid inputs, please check your inputs.', 422))
     }
 
-    const {fName, lName, email, password, address, city, state, zipCode, image} = req.body
+    const {fName, lName, email, password, address, city, state, zipCode} = req.body
     const userId = req.params.uid
 
     let user
@@ -116,7 +117,6 @@ const updateUserProfile = async (req, res, next) => {
     user.city = city
     user.state = state
     user.zipCode = zipCode
-    user.image = image
 
     try {
         await user.save()
