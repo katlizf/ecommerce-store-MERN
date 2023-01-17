@@ -9,7 +9,6 @@ import Input from '../formElements/Input'
 import ErrorModal from '../uiElements/ErrorModal'
 import LoadingSpinner from '../uiElements/LoadingSpinner'
 import PageContainer from '../pageContainer/PageContainer'
-import ImageUpload from '../formElements/ImageUpload'
 
 function UpdateUser() {
 
@@ -44,10 +43,6 @@ function UpdateUser() {
             zipCode: {
                 value: '',
                 isValid: false
-            },
-            image: {
-                value: '',
-                isValid: true
             }
         }, false
     )
@@ -90,10 +85,6 @@ function UpdateUser() {
                         zipCode: {
                             value: response.user.zipCode,
                             isValid: true
-                        },
-                        image: {
-                            value: response.user.image,
-                            isValid: true
                         }
                     }, true
                 )
@@ -106,20 +97,19 @@ function UpdateUser() {
         e.preventDefault()
 
         try {
-            await sendRequest(`http://localhost:5000/api/users/user/${userId}`, 'PATCH', JSON.stringify({
-                fName: formState.inputs.fName.value,
-                lName: formState.inputs.lName.value,
-                email: formState.inputs.email.value,
-                password: formState.inputs.password.value,
-                address: formState.inputs.address.value,
-                city: formState.inputs.city.value,
-                state: formState.inputs.state.value,
-                zipCode: formState.inputs.zipCode.value,
-                image: formState.inputs.image.value
-            }),
-                {'Content-Type': 'application/json'})
+            const formData = new FormData()
+            formData.append('fName', formState.inputs.fName.value)
+            formData.append('lName', formState.inputs.lName.value)
+            formData.append('email', formState.inputs.email.value)
+            formData.append('password', formState.inputs.password.value)
+            formData.append('address', formState.inputs.address.value)
+            formData.append('city', formState.inputs.city.value)
+            formData.append('state', formState.inputs.state.value)
+            formData.append('zipCode', formState.inputs.zipCode.value)
+            await sendRequest(`http://localhost:5000/api/users/user/${userId}`, 'PATCH', formData)
             history.push('/' + auth.userId + '/Profile')
             // redirct to Profile
+            console.log(formState.inputs.image.value)
         } catch (err) { }
     }
 
@@ -144,10 +134,6 @@ function UpdateUser() {
             <ErrorModal error={error} onClear={clearError} />
             {!isLoading && userProfile && (
                 <form onSubmit={profileUpdateSubmitHandler}>
-                    <ImageUpload
-                        id='image'
-                        {...userProfile}
-                        onInput={inputHandler} />
                     <Input
                         id="fName"
                         element='input'
