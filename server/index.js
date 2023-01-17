@@ -1,3 +1,5 @@
+const path = require('path')
+const fs = require('fs')
 const express = require('express')
 const bodyParser = require('body-parser')
 const dotenv = require('dotenv')
@@ -11,6 +13,10 @@ const HttpError = require('./models/http-error')
 
 const app = express()
 
+app.use(bodyParser.json())
+
+app.use('/uploads/images', express.static(path.join('uploads', 'images')))
+
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*')
     res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization')
@@ -20,8 +26,6 @@ app.use((req, res, next) => {
 // for handling CORS errors
 
 app.use('/api/products', productRoutes)
-
-app.use(bodyParser.json())
 
 app.use('/api/users', userRoutes)
 
@@ -34,6 +38,11 @@ app.use((req, res, next) => {
 // to handle errors for unsupported routes
 
 app.use((error, req, res, next) => {
+    if (req.file) {
+        fs.unlink(req.file.path, err => {
+            console.log(err)
+        })
+    }
     if (res.headerSent) {
         return next(error)
     }
