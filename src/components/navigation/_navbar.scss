@@ -7,15 +7,22 @@
     display: none;
     @include md {
         display: block;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        margin: 1rem 2rem 1rem 1rem;
         width: 2rem;
         height: 2rem;
         background: transparent;
         border: none;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-around;
-        margin-right: 2rem;
         cursor: pointer;
+        @include md {
+            margin: 1rem 1rem 1rem 0;
+        }
+        @include sm {
+            width: 1.5rem;
+            height: 1.75rem;
+        }
     }
     span {
         display: none;
@@ -29,17 +36,30 @@
 }
 .main-title {
     a {
+        display: flex;
+        align-items: center;
+        font-size: 2rem;
         text-decoration: none;
         color: white;  
         font-family: 'Kdam Thmor Pro', sans-serif;
+        @include md {
+            font-size: 1.5rem;
+        }
         @include sm {
-            font-size: 2rem;
+            font-size: 1.2rem;
         }
     }
 }
-.header-nav {
-    display: block;
+.navlinks {
+    display: flex;
+    flex-direction: row;
     @include md {
-        display: none;
+        padding-right: 2rem;
+    }
+    .header-nav {
+        display: block;
+        @include md {
+            display: none;
+        }
     }
 }
