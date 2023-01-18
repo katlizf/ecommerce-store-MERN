@@ -11,33 +11,26 @@
         align-items: unset;
     }
 	li {
-		margin: 1rem;
+		margin: 0.5rem;
 	}
 	a {
 		color: black;
 		text-decoration: none;
+        font-size: 1rem;
 		padding: 0.5rem;
-		@include md {
-			text-decoration: none;
-		}
 	}
 	button {
 		cursor: pointer;
-		border: 1px solid #292929;
-		color: #292929;
-		background: transparent;
+        color: black;
+		text-decoration: none;
+        font-size: 1.25rem;
 		padding: 0.5rem;
-		font: inherit;
-		@include md {
-			border: 1px solid white;
-			color: white;
-			background: transparent;
-		}
+        border: none;
+		background: transparent;
 	}
 }
 .nav-links a:hover,
-.nav-links a:active,
-.nav-links a.active {
+.nav-links a:active {
 	background: $primary-color;
 	border-color: #292929;
 	color: white;
@@ -45,10 +38,8 @@
 }
 .nav-links button:hover,
 .nav-links button:active {
-	background: #292929;
+	background: $primary-color;
+	border-color: #292929;
 	color: white;
-	@include md {
-		background: #f8df00;
-		color: #292929;
-	}
+    text-decoration: underline;
 }
