@@ -8,7 +8,7 @@ function SideNav(props) {
         <CSSTransition
             in={props.show}
             timeout={200}
-            classNames='slide-in-left'
+            classNames='slide-in-right'
             mountOnEnter
             unmountOnExit
             >
