@@ -4,6 +4,7 @@ import MainHeader from "./MainHeader"
 import NavLinks from "./NavLinks"
 import SideNav from "./SideNav"
 import Backdrop from '../uiElements/Backdrop'
+import CartProfileNavLinks from './CartProfileNavLinks'
 
 function Navbar() {
 
@@ -25,17 +26,20 @@ function Navbar() {
                 </nav>
             </SideNav>
             <MainHeader>
-                <button className="menu-btn" onClick={openSideNav}>
-                    <span />
-                    <span />
-                    <span />
-                </button>
                 <h1 className="main-title">
                     <Link to='/'>Weebs-R-Us</Link>                
                 </h1>
-                <nav className="header-nav">
-                    <NavLinks />
-                </nav>
+                <div className='navlinks'>
+                    <nav className="header-nav">
+                        <NavLinks />
+                    </nav>
+                    <CartProfileNavLinks />
+                    <button className="menu-btn" onClick={openSideNav}>
+                        <span />
+                        <span />
+                        <span />
+                    </button>
+                </div>
             </MainHeader>
         </div>
     )
