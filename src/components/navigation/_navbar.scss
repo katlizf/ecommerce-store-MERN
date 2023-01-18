@@ -7,8 +7,8 @@
     display: none;
     @include md {
         display: block;
-        width: 3rem;
-        height: 3rem;
+        width: 2rem;
+        height: 2rem;
         background: transparent;
         border: none;
         display: flex;
@@ -19,7 +19,7 @@
     }
     span {
         display: none;
-        width: 3rem;
+        width: 2rem;
         height: 2.5px;
         background: white;
         @include md {
@@ -28,11 +28,13 @@
     }
 }
 .main-title {
-    // color: white;
     a {
         text-decoration: none;
         color: white;  
         font-family: 'Kdam Thmor Pro', sans-serif;
+        @include sm {
+            font-size: 2rem;
+        }
     }
 }
 .header-nav {
