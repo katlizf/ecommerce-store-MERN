@@ -7,6 +7,12 @@
     width: 55%;
     background: white;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+    ul {
+        margin-top: 3rem;
+        a {
+            font-size: 1.25rem;
+        }
+    }
 }
 .slide-in-left-enter{
     transform: translateX(-100%);
