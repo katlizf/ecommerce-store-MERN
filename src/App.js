@@ -1,77 +1,84 @@
-import {useState, useCallback} from 'react'
-import {Route, Redirect, Switch} from 'react-router-dom'
-import {AuthContext} from './context/AuthContext'
-import Navbar from './components/navigation/Navbar'
-import Apparel from './pages/apparel/Apparel'
-import Collectables from './pages/collectables/Collectables'
-import Home from './pages/home/Home'
-import Profile from './pages/profile/Profile'
-import Auth from './pages/user/Auth'
-import UpdateUser from './components/user/UpdateUser'
+import {useState, useCallback} from "react"
+import {Route, Redirect, Switch} from "react-router-dom"
+import {AuthContext} from "./context/AuthContext"
+import Navbar from "./components/navigation/Navbar"
+import Apparel from "./pages/apparel/Apparel"
+import Collectables from "./pages/collectables/Collectables"
+import Home from "./pages/home/Home"
+import Profile from "./pages/profile/Profile"
+import Auth from "./pages/user/Auth"
+import UpdateUser from "./components/user/UpdateUser"
 
 function App() {
 
-    const [isLoggedIn, setIsLoggedIn] = useState(false)
-    const [userId, setUserId] = useState(false)
+	const [isLoggedIn, setIsLoggedIn] = useState(false)
+	const [userId, setUserId] = useState(false)
 
-    const login = useCallback(uid => {
-        setIsLoggedIn(true)
-        setUserId(uid)
-    }, [])
+	const login = useCallback(uid => {
+		setIsLoggedIn(true)
+		setUserId(uid)
+	}, [])
 
-    const logout = useCallback(() => {
-        setIsLoggedIn(false)
-        setUserId(null)
-    }, [])
+	const logout = useCallback(() => {
+		setIsLoggedIn(false)
+		setUserId(null)
+	}, [])
 
-    let routes
-    if (isLoggedIn) {
-        routes = (
-            <Switch>
-                <Route path='/' exact>
-                    <Home />
-                </Route>
-                <Route path='/Apparel'>
-                    <Apparel />
-                </Route>
-                <Route path='/Collectables'>
-                    <Collectables />
-                </Route>
-                <Route path='/:userId/Profile'>
-                    <Profile />
-                </Route>
-                <Route path='/users/user/:userId'>
-                    <UpdateUser />
-                </Route>
-                <Redirect to='/' />
-            </Switch>
-        )
-    } else {
-        routes = (
-            <Switch>
-                <Route path='/' exact>
-                    <Home />
-                </Route>
-                <Route path='/Apparel'>
-                    <Apparel />
-                </Route>
-                <Route path='/Collectables'>
-                    <Collectables />
-                </Route>
-                <Route path='/Auth'>
-                    <Auth />
-                </Route>
-                <Redirect to='/Auth' />
-            </Switch>
-        )
-    }
+	let routes
+	if (isLoggedIn) {
+		routes = (
+			<Switch>
+				<Route path="/" exact>
+					<Home />
+				</Route>
+				<Route path="/Apparel">
+					<Apparel />
+				</Route>
+				<Route path="/Collectables">
+					<Collectables />
+				</Route>
+				<Route path="/:userId/Profile">
+					<Profile />
+				</Route>
+				<Route path="/users/user/:userId">
+					<UpdateUser />
+				</Route>
+				<Redirect to="/" />
+			</Switch>
+		)
+	} else {
+		routes = (
+			<Switch>
+				<Route path="/" exact>
+					<Home />
+				</Route>
+				<Route path="/Apparel">
+					<Apparel />
+				</Route>
+				<Route path="/Collectables">
+					<Collectables />
+				</Route>
+				<Route path="/Auth">
+					<Auth />
+				</Route>
+				<Redirect to="/Auth" />
+			</Switch>
+		)
+	}
 
-    return (
-        <AuthContext.Provider value={{isLoggedIn: isLoggedIn, userId: userId, login: login, logout: logout}}>
-           <Navbar />
-            {routes}
-        </AuthContext.Provider>
-    )
+	return (
+		<AuthContext.Provider
+			value={{
+				isLoggedIn: isLoggedIn,
+				userId: userId,
+				login: login,
+				logout: logout,
+			}}
+		>
+			<Navbar />
+			{routes}
+		</AuthContext.Provider>
+	)
 }
 
 export default App
