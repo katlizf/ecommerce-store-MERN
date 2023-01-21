@@ -1,11 +1,12 @@
 .side-nav {
     position: fixed;
     left: 0;
-    top: 0;
+    top: 65px;
     z-index: 100;
-    height: 100vh;
-    width: 55%;
-    background: white;
+    height: 93vh;
+    width: 45%;
+    background: $primary-color;
+    opacity: 0.9;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
     ul {
         margin-top: 3rem;
@@ -14,19 +15,19 @@
         }
     }
 }
-.slide-in-right-enter{
+.slide-in-left-enter{
     transform: translateX(-100%);
 }
-.slide-in-right-enter-active {
+.slide-in-left-enter-active {
     transform: tranlateX(0);
     opacity: 1;
     transition: all 200ms;
 }
-.slide-in-right-exit {
+.slide-in-left-exit {
     transform: translateX(0%);
     opacity: 1;
 }
-.slide-in-right-exit-active {
+.slide-in-left-exit-active {
     transform: translate(-100%);
     opacity: 0;
     transition: all 200ms;
