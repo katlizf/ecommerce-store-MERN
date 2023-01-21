@@ -3,4 +3,7 @@
     @include md {
        margin: 8rem 3rem 0 3rem;     
     }
+    @include sm {
+        margin: 6rem 1rem 0 1rem;
+    }
 }
