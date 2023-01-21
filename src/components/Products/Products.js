@@ -1,7 +1,7 @@
 import Product from "./Product"
 
 function Products(props) {
-
+    
 	if (props.items.length === 0) {
 		return (
 			<div>
