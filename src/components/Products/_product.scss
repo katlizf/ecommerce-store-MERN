@@ -52,6 +52,11 @@
         }
     }
 }
-.product-card:nth-child(5n+1) {
-    border-radius: none;
+.product-card:nth-child(5n) {
+    border-right: none;
+}
+.product-card:nth-child(2n) {
+    @include sm {
+        border-right: none;
+    }
 }
