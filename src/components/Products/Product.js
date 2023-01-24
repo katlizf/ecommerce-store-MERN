@@ -10,7 +10,10 @@ function Product(props) {
             </div>
             <div className="price-cart">
                 <h2 className="price">{props.price}</h2>
-			    <Button className="cart-btn">Add to Cart</Button>
+			    <Button className="cart-btn">
+                    <p className="add-to-cart">Add to Cart</p>
+                    <i className="icon-shopping-cart"></i>
+                </Button>
             </div>
 		</div>
 	)
