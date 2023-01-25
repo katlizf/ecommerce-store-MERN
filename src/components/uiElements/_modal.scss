@@ -1,17 +1,12 @@
 .modal {
 	z-index: 100;
-	position: fixed;
-	margin: 10rem 8rem 0 8rem;
-	width: 80%;
+	width: 40%;
 	background: white;
 	box-shadow: 0 2px 8px rgbd(0, 0, 0, 0.26);
 	border-radius: 8px;
-    @include md {
-        margin: 8rem 3rem 0 3rem;     
-     }
 	.modal-header {
-		width: 100%;
 		padding: 1rem 0.5rem;
+        border-radius: 8px;
 		background: $primary-color;
 		color: white;
 		h2 {
