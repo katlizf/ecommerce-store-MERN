@@ -17,7 +17,6 @@ import PageContainer from "../../components/pageContainer/PageContainer"
 import ImageUpload from "../../components/formElements/ImageUpload"
 
 function Auth() {
-
 	const auth = useContext(AuthContext)
 	const [isLoginMode, setIsLoginMode] = useState(true)
 	const {isLoading, error, sendRequest, clearError} = useHttpClient()
@@ -138,62 +137,66 @@ function Auth() {
 				<form className="auth-form" onSubmit={authSubmitHandler}>
 					{!isLoginMode && (
 						<div>
-							<ImageUpload
+							{/* <ImageUpload
 								id="image"
 								onInput={inputHandler}
 								required="false"
-							/>
-							<Input
-								id="fName"
-								type="text"
-								label="First Name: "
-								validators={[VALIDATOR_REQUIRE]}
-								errorText="Please enter your first name."
-								onInput={inputHandler}
-							/>
-							<Input
-								id="lName"
-								type="text"
-								label="Last Name: "
-								validators={[VALIDATOR_REQUIRE]}
-								errorText="Please enter your last name."
-								onInput={inputHandler}
-							/>
+							/> */}
+							<div className="register-name">
+								<Input
+									id="fName"
+									type="text"
+									label="First Name: "
+									validators={[VALIDATOR_REQUIRE]}
+									errorText="Please enter your first name."
+									onInput={inputHandler}
+								/>
+								<Input
+									id="lName"
+									type="text"
+									label="Last Name: "
+									validators={[VALIDATOR_REQUIRE]}
+									errorText="Please enter your last name."
+									onInput={inputHandler}
+								/>
+							</div>
 							<Input
 								id="address"
 								type="text"
 								label="Address: "
 								validators={[VALIDATOR_REQUIRE]}
-								errorText="Please enter your street address."
+								errorText="Please enter your street address and apt/suite number if appropriate."
 								onInput={inputHandler}
 							/>
-							<Input
-								id="city"
-								type="text"
-								label="City: "
-								validators={[VALIDATOR_REQUIRE]}
-								errorText="Please enter your city name."
-								onInput={inputHandler}
-							/>
-							<Input
-								id="state"
-								type="text"
-								label="State: "
-								validators={[
-									VALIDATOR_MINLENGTH(2),
-									VALIDATOR_MAXLENGTH(2),
-								]}
-								errorText="Please enter your state's abbreviation (2 letters)."
-								onInput={inputHandler}
-							/>
-							<Input
-								id="zipCode"
-								type="text"
-								label="Zip Code: "
-								validators={[VALIDATOR_MINLENGTH(5)]}
-								errorText="Please enter your 5-digit zip code."
-								onInput={inputHandler}
-							/>
+							<div className="city-state-zip-input">
+								<Input
+									id="city"
+									type="text"
+									label="City: "
+									validators={[VALIDATOR_REQUIRE]}
+									errorText="Please enter your city name."
+									onInput={inputHandler}
+								/>
+								<Input
+									id="state"
+									type="text"
+									label="State: "
+									validators={[
+										VALIDATOR_MINLENGTH(2),
+										VALIDATOR_MAXLENGTH(2),
+									]}
+									errorText="Ex. WI"
+									onInput={inputHandler}
+								/>
+								<Input
+									id="zipCode"
+									type="text"
+									label="Zip Code: "
+									validators={[VALIDATOR_MINLENGTH(5)]}
+									errorText="5-digit zip code"
+									onInput={inputHandler}
+								/>
+							</div>
 						</div>
 					)}
 					<Input
