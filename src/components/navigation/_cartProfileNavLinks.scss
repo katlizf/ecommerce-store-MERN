@@ -58,9 +58,12 @@
         }
     }
 }
-.links li:hover,
-.links li:active,
-.links li.active {
+.links a:hover,
+.links a:active,
+.links a.active,
+.links .dropdown-btn:hover,
+.links .dropdown-btn:active,
+.links .dropdown-btn.active {
 	background: $primary-color;
 	border-color: #292929;
 	color: white;
