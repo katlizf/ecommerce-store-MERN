@@ -65,7 +65,7 @@ function Input(props) {
 				value={inputState.value}
 			/>
 			{!inputState.isValid && inputState.isTouched && (
-				<p>{props.errorText}</p>
+				<p className="error-message">{props.errorText}</p>
 			)}
 		</div>
 	)

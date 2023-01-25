@@ -17,4 +17,8 @@
         border-color: $danger;
         background-color: #ffd1d1;
     }
+    .error-message {
+        color: $danger;
+        max-width: 27rem;
+    }
 }
