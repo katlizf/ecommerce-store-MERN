@@ -3,8 +3,8 @@ import Button from "../formElements/Button"
 function Product(props) {
 	return (
 		<div className="product-card">
-            <div className="img-name-desc">
-                <img className="image" src={props.image} alt={props.productName} />
+            <img className="image" src={props.image} alt={props.productName} />
+            <div className="name-desc">
 			    <h2 className="name">{props.productName}</h2>
 			    <h3 className="description">{props.description}</h3>
             </div>
