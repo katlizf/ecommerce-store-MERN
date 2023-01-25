@@ -1,0 +1,38 @@
+.profile-info {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    width: 36%;
+    margin-left: 32%;
+    // .title {
+    //     font-size: 32px;
+    // }
+    .profile-pic {
+        height: 4rem;
+    }
+    .section-name {
+        margin-top: 1.5rem;
+        font-size: 22px;
+        font-weight: 600;
+    }
+    .cust-name, .login, .address {
+        margin-left: 5rem;
+        padding-bottom: 2rem;
+        border-bottom: 1px solid $light-grey;
+    }
+    .cust-name {
+        display: flex;
+        flex-direction: row;
+    }
+    .profile-detail {
+        margin: 0;
+        font-size: 20px;
+        font-weight: 500;
+        line-height: 1.25;
+    }
+    .edit-delete-btn {
+        display: flex;
+        justify-content: center;
+        margin-top: 2rem;
+    }
+}
