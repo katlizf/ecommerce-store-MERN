@@ -65,23 +65,34 @@ function UserDetails({
 					that this cannot be undone.
 				</p>
 			</Modal>
-			<h1>Profile</h1>
-			<Avatar
-				id="profile-pic"
-				image={`http://localhost:5000/${image}`}
-				alt={fName}
-			/>
-			<h2>{fName}</h2>
-			<h2>{lName}</h2>
-			<h2>{email}</h2>
-			<h2>{password}</h2>
-			<h2>{address}</h2>
-			<h2>{city}</h2>
-			<h2>{state}</h2>
-			<h2>{zipCode}</h2>
-			<div>
-				<Button to={`/users/user/${id}`}>Edit</Button>
-				<Button onClick={showDeleteWarningHandler}>Delete</Button>
+			<div className="profile-info">
+				{/* <h1 className="title">Profile</h1> */}
+				<Avatar
+					id="profile-pic"
+					image={`http://localhost:5000/${image}`}
+					alt={fName}
+				/>
+				<div className="cust-name">
+					<h2 className="profile-detail">
+						{fName} {lName}
+					</h2>
+				</div>
+				<p className="section-name">Login</p>
+				<div className="login">
+					<h2 className="profile-detail">Email:   {email}</h2>
+					<h2 className="profile-detail">Password:   {password}</h2>
+				</div>
+				<p className="section-name">Address</p>
+				<div className="address">
+					<h2 className="profile-detail">{address}</h2>
+					<h2 className="profile-detail">
+						{city}, {state} {zipCode}
+					</h2>
+				</div>
+				<div className="edit-delete-btn">
+					<Button to={`/users/user/${id}`}>Edit</Button>
+					<Button onClick={showDeleteWarningHandler}>Delete</Button>
+				</div>
 			</div>
 		</React.Fragment>
 	)
