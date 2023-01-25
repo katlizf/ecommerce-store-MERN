@@ -1,5 +1,6 @@
 import {useState, useCallback} from "react"
 import {Route, Redirect, Switch} from "react-router-dom"
+import {useHistory} from "react-router-dom"
 import {AuthContext} from "./context/AuthContext"
 import Navbar from "./components/navigation/Navbar"
 import Apparel from "./pages/apparel/Apparel"
@@ -14,6 +15,7 @@ function App() {
 
 	const [isLoggedIn, setIsLoggedIn] = useState(false)
 	const [userId, setUserId] = useState(false)
+	let history = useHistory()
 
 	const login = useCallback(uid => {
 		setIsLoggedIn(true)
@@ -23,6 +25,7 @@ function App() {
 	const logout = useCallback(() => {
 		setIsLoggedIn(false)
 		setUserId(null)
+        history.push("/")
 	}, [])
 
 	let routes
