@@ -2,8 +2,4 @@
     display: flex;
     align-items: center;
     flex-direction: column;
-    margin: 10rem 30rem 0 30rem;
-    @include md {
-        margin: 10rem 0 0 0;
-    }
 }
