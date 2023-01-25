@@ -9,7 +9,7 @@ function CartProfileNavLinks() {
 	return (
 		<ul className="links">
 			<li>
-				<NavLink to="">
+				<NavLink to={`/${auth.userId}/Cart`}>
 					<i className="icon-shopping-cart"></i>
 				</NavLink>
 			</li>
