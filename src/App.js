@@ -8,6 +8,7 @@ import Home from "./pages/home/Home"
 import Profile from "./pages/profile/Profile"
 import Auth from "./pages/user/Auth"
 import UpdateUser from "./components/user/UpdateUser"
+import Cart from "./pages/cart/Cart"
 
 function App() {
 
@@ -37,6 +38,9 @@ function App() {
 				<Route path="/Collectables">
 					<Collectables />
 				</Route>
+                <Route path="/:userId/Cart">
+                    <Cart />
+                </Route>
 				<Route path="/:userId/Profile">
 					<Profile />
 				</Route>
@@ -58,6 +62,9 @@ function App() {
 				<Route path="/Collectables">
 					<Collectables />
 				</Route>
+                <Route path="/:userId/Cart">
+                    <Cart />
+                </Route>
 				<Route path="/Auth">
 					<Auth />
 				</Route>
