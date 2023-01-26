@@ -66,7 +66,6 @@ function UserDetails({
 				</p>
 			</Modal>
 			<div className="profile-info">
-				{/* <h1 className="title">Profile</h1> */}
 				<Avatar
 					id="profile-pic"
 					image={`http://localhost:5000/${image}`}
