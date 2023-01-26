@@ -29,7 +29,7 @@ function Profile() {
 	return (
 		<PageContainer>
 			<ErrorModel error={error} onClear={clearError} />
-			{isLoading && <LoadingSpinner />}
+			{isLoading && <LoadingSpinner asOverlay />}
 			{!isLoading && userProfile && (
 				<div>
 					<UserDetails {...userProfile} />

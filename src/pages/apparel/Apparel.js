@@ -26,7 +26,7 @@ function Apparel() {
 	return (
 		<PageContainer>
 			<ErrorModal error={error} onClear={clearError} />
-			{isLoading && <LoadingSpinner />}
+			{isLoading && <LoadingSpinner asOverlay />}
 			{!isLoading && allApparel && (
 				<div>
 					<Products items={allApparel} />
