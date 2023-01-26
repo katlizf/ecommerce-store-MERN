@@ -6,19 +6,32 @@
         display: flex;
         flex-direction: row;
         justify-content: space-between;
+        @include sm {
+            flex-direction: column;
+        }
         #fName, #lName {
             width: 12rem;
         }
     }
     #address {
         width: 28rem;
+        @include sm {
+            width: 12rem;
+        }
     }
     .city-state-zip-input {
         display: flex;
         flex-direction: row;
         justify-content: space-between;
+        @include sm {
+            flex-direction: column;
+            justify-content: unset;
+        }
         #city {
             width: 14rem;
+            @include sm {
+                width: 12rem;
+            }
         }
         #state {
             width: 3rem;
@@ -29,5 +42,8 @@
     }
     #email, #password {
         width: 28rem;
+        @include sm {
+            width: 12rem;
+        }
     }
 }
