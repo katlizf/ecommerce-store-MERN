@@ -1,0 +1,20 @@
+.edit-profile-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: -2.75rem;
+    width: 24%;
+    margin-left: 38%;
+    .paswd-toggle {
+        display: flex;
+        flex-direction: row;
+        #eye-toggle {
+            margin: 34px 0 0 -24px;   
+            cursor: pointer;
+        }
+    }
+    .update-cancel-btns {
+        display: flex;
+        justify-content: space-between;
+    }
+}

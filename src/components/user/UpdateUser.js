@@ -130,7 +130,7 @@ function UpdateUser() {
 	if (isLoading) {
 		return (
 			<div>
-				<LoadingSpinner />
+				<LoadingSpinner asOverlay />
 			</div>
 		)
 	}
@@ -143,13 +143,24 @@ function UpdateUser() {
 		)
 	}
 
+    const togglePassword = document.getElementById("eyeToggle")
+    const password = document.getElementById("password")
+
+    const toggle = e => {
+        e.preventDefault()
+        const type = password.getAttribute("type") === "password" ? "text" : "password"
+        password.setAttribute("type", type)
+        togglePassword.className.toggle("fa-solid fa-eye")
+    }
+
 	return (
 		<PageContainer>
 			<ErrorModal error={error} onClear={clearError} />
 			{!isLoading && userProfile && (
-				<form onSubmit={profileUpdateSubmitHandler}>
+				<form className="edit-profile-form" onSubmit={profileUpdateSubmitHandler}>
 					<Input
 						id="fName"
+                        className="editable-detail"
 						element="input"
 						type="text"
 						label="First Name: "
@@ -161,6 +172,7 @@ function UpdateUser() {
 					/>
 					<Input
 						id="lName"
+                        className="editable-detail"
 						element="input"
 						type="text"
 						label="Last Name: "
@@ -172,6 +184,7 @@ function UpdateUser() {
 					/>
 					<Input
 						id="email"
+                        className="editable-detail"
 						element="input"
 						type="text"
 						label="Email: "
@@ -181,19 +194,24 @@ function UpdateUser() {
 						value={userProfile.email}
 						initialValid={true}
 					/>
-					<Input
-						id="password"
-						element="input"
-						type="password"
-						label="Password: "
-						validators={[VALIDATOR_PASSWORD()]}
-						errorText="Your password must be at least 8 characters long and should include at least 1 uppercase, 1 lowercase, 1 number, & 1 special character."
-						onInput={inputHandler}
-						value={userProfile.password}
-						initialValid={true}
-					/>
+                    <div className="paswd-toggle">
+                        <Input
+                            id="password"
+                            className="editable-detail"
+                            element="input"
+                            type="password"
+                            label="Password: "
+                            validators={[VALIDATOR_PASSWORD()]}
+                            errorText="Your password must be at least 8 characters long and should include at least 1 uppercase, 1 lowercase, 1 number, & 1 special character."
+                            onInput={inputHandler}
+                            value={userProfile.password}
+                            initialValid={true}
+                        />
+                        <i id="eye-toggle" className="fa-solid fa-eye" onClick={toggle}></i>
+                    </div>
 					<Input
 						id="address"
+                        className="editable-detail"
 						element="input"
 						type="text"
 						label="Address: "
@@ -205,6 +223,7 @@ function UpdateUser() {
 					/>
 					<Input
 						id="city"
+                        className="editable-detail"
 						element="input"
 						type="text"
 						label="City: "
@@ -216,6 +235,7 @@ function UpdateUser() {
 					/>
 					<Input
 						id="state"
+                        className="editable-detail"
 						element="input"
 						type="text"
 						label="State: "
@@ -230,6 +250,7 @@ function UpdateUser() {
 					/>
 					<Input
 						id="zipCode"
+                        className="editable-detail"
 						element="input"
 						type="text"
 						label="Zip Code: "
@@ -239,10 +260,12 @@ function UpdateUser() {
 						value={userProfile.zipCode}
 						initialValid={true}
 					/>
-					<Button type="submit" disabled={!formState.isValid}>
-						Update Profile
-					</Button>
-					<Button to={`/${userId}/Profile`}>Cancel</Button>
+                    <div className="update-cancel-btns">
+					    <Button to={`/${userId}/Profile`}>Cancel</Button>
+                        <Button type="submit" disabled={!formState.isValid}>
+						    Update Profile
+					    </Button>
+                    </div>
 				</form>
 			)}
 		</PageContainer>
