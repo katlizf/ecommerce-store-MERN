@@ -23,6 +23,7 @@ function UserDetails({
 	const {isLoading, error, sendRequest, clearError} = useHttpClient()
 	const auth = useContext(AuthContext)
 	const [showConfirmModal, setShowConfirmModal] = useState(false)
+    const [toggled, setToggled] = useState(false)
 	let history = useHistory()
 
 	const showDeleteWarningHandler = () => {
@@ -44,6 +45,15 @@ function UserDetails({
 			auth.logout()
 		} catch (err) {}
 	}
+
+    const userPassword = document.getElementById("password")
+
+    const toggle = e => {
+        e.preventDefault()
+        const type = userPassword.getAttribute("type") === "password" ? "text" : "password"
+        userPassword.setAttribute("type", type)
+        setToggled(current => !current)
+    }
 
 	return (
 		<React.Fragment>
@@ -79,7 +89,17 @@ function UserDetails({
 				<p className="section-name">Login</p>
 				<div className="login">
 					<h2 className="profile-detail">Email:   {email}</h2>
-					<h2 className="profile-detail">Password:   {password}</h2>
+                    <div className="pswd-eye-toggle">
+                        <h2 className="profile-detail">Password: </h2>
+                        <input 
+                            id="password"
+                            className="profile-detail"
+                            type="password"
+                            readOnly
+                            value={password}>
+                        </input>
+                        <i id="eye-toggle" className={toggled ? "fa-solid fa-eye" : "fa-sharp fa-solid fa-eye-slash"} onClick={toggle}></i>
+                    </div>
 				</div>
 				<p className="section-name">Address</p>
 				<div className="address">

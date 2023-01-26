@@ -27,6 +27,18 @@
         font-weight: 500;
         line-height: 1.25;
     }
+    .pswd-eye-toggle {
+        display: flex;
+        flex-direction: row;
+        cursor: pointer;
+        #password {
+            color: black;
+            background: none;
+            border: none;
+            box-shadow: none;
+            cursor: default;
+        }
+    }
     .edit-delete-btn {
         display: flex;
         justify-content: center;
