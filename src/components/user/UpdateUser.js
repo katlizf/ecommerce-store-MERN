@@ -19,6 +19,7 @@ import PageContainer from "../pageContainer/PageContainer"
 function UpdateUser() {
 
 	const [userProfile, setUserProfile] = useState()
+    const [toggled, setToggled] = useState(false)
 	const {isLoading, error, sendRequest, clearError} = useHttpClient()
 	const auth = useContext(AuthContext)
 	const userId = useParams().userId
@@ -143,14 +144,13 @@ function UpdateUser() {
 		)
 	}
 
-    const togglePassword = document.getElementById("eyeToggle")
     const password = document.getElementById("password")
 
     const toggle = e => {
         e.preventDefault()
         const type = password.getAttribute("type") === "password" ? "text" : "password"
         password.setAttribute("type", type)
-        togglePassword.className.toggle("fa-solid fa-eye")
+        setToggled(current => !current)
     }
 
 	return (
@@ -207,7 +207,7 @@ function UpdateUser() {
                             value={userProfile.password}
                             initialValid={true}
                         />
-                        <i id="eye-toggle" className="fa-solid fa-eye" onClick={toggle}></i>
+                        <i id="eye-toggle" className={toggled ? "fa-solid fa-eye" : "fa-sharp fa-solid fa-eye-slash"} onClick={toggle}></i>
                     </div>
 					<Input
 						id="address"
