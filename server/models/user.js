@@ -12,7 +12,7 @@ const userSchema = new Schema({
     city: {type: String, require: true},
     state: {type: String, require: true},
     zipCode: {type: Number, require: true},
-    image: {type: String},
+    image: {type: String, required: true},
     products: [{type: mongoose.Types.ObjectId, ref: 'Product'}]
     // adding relationship between user and products
 })
