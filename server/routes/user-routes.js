@@ -8,7 +8,7 @@ const router = express.Router()
 
 router.get('/user/:uid', usersController.getUserById)
 
-router.post('/signup', 
+router.post('/signup', fileUpload.single('image'),
     [
         check('fName').not().isEmpty().withMessage('First name is required'),
         check('lName').not().isEmpty().withMessage('Last name is required'),
