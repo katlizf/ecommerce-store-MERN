@@ -149,11 +149,6 @@ function Auth() {
 				<form className="auth-form" onSubmit={authSubmitHandler}>
 					{!isLoginMode && (
 						<div>
-							<ImageUpload
-								id="image"
-								onInput={inputHandler}
-								errorText="Please provide an image"
-							/>
 							<div className="register-name">
 								<Input
 									id="fName"
@@ -172,6 +167,11 @@ function Auth() {
 									onInput={inputHandler}
 								/>
 							</div>
+                            <ImageUpload
+								id="image-upload"
+								onInput={inputHandler}
+								errorText="Please provide an image"
+							/>
 							<Input
 								id="address"
 								type="text"
