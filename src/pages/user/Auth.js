@@ -17,7 +17,6 @@ import PageContainer from "../../components/pageContainer/PageContainer"
 import ImageUpload from "../../components/formElements/ImageUpload"
 
 function Auth() {
-
 	const auth = useContext(AuthContext)
 	const [isLoginMode, setIsLoginMode] = useState(true)
 	const {isLoading, error, sendRequest, clearError} = useHttpClient()
@@ -109,33 +108,21 @@ function Auth() {
 			} catch (err) {}
 		} else {
 			try {
-                const formData = new FormData()
-                formData.append('fName', formState.inputs.fName.value)
-                formData.append('lName', formState.inputs.lName.value)
-                formData.append('email', formState.inputs.email.value)
-                formData.append('password', formState.inputs.password.value)
-                formData.append('address', formState.inputs.address.value)
-                formData.append('city', formState.inputs.city.value)
-                formData.append('state', formState.inputs.state.value)
-                formData.append('zipCode', formState.inputs.zipCode.value)
-                formData.append('image', formState.inputs.image.value)
-                const response = await sendRequest('http://localhost:5000/api/users/signup', 'POST', formData)
-				// const response = await sendRequest(
-				// 	"http://localhost:5000/api/users/signup",
-				// 	"POST",
-				// 	JSON.stringify({
-				// 		fName: formState.inputs.fName.value,
-				// 		lName: formState.inputs.lName.value,
-				// 		email: formState.inputs.email.value,
-				// 		password: formState.inputs.password.value,
-				// 		address: formState.inputs.address.value,
-				// 		city: formState.inputs.city.value,
-				// 		state: formState.inputs.state.value,
-				// 		zipCode: formState.inputs.zipCode.value,
-				// 		image: formState.inputs.image.value,
-				// 	}),
-				// 	{"Content-Type": "application/json"}
-				// )
+				const formData = new FormData()
+				formData.append("fName", formState.inputs.fName.value)
+				formData.append("lName", formState.inputs.lName.value)
+				formData.append("email", formState.inputs.email.value)
+				formData.append("password", formState.inputs.password.value)
+				formData.append("address", formState.inputs.address.value)
+				formData.append("city", formState.inputs.city.value)
+				formData.append("state", formState.inputs.state.value)
+				formData.append("zipCode", formState.inputs.zipCode.value)
+				formData.append("image", formState.inputs.image.value)
+				const response = await sendRequest(
+					"http://localhost:5000/api/users/signup",
+					"POST",
+					formData
+				)
 				auth.login(response.user.id)
 			} catch (err) {}
 		}
@@ -167,10 +154,10 @@ function Auth() {
 									onInput={inputHandler}
 								/>
 							</div>
-                            <ImageUpload
-								id="image-upload"
+							<ImageUpload
+								id="image"
 								onInput={inputHandler}
-								errorText="Please provide an image"
+								// errorText="Please provide an image."
 							/>
 							<Input
 								id="address"
