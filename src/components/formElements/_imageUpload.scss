@@ -1,0 +1,13 @@
+.image-upload-form {
+    display: flex;
+    justify-content: center;
+    .image-upload-preview {
+        margin: 10px 0 10px 0;
+        width: 10rem;
+        height: 10rem;
+        border-radius: 5px;
+    }
+    Button {
+        width: 10rem;
+    }
+}
