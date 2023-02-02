@@ -1,6 +1,6 @@
 function Avatar({fName, image}) {
     return (
-        <div >
+        <div className="avatar">
             <img src={image} alt={fName} />
         </div>
     )
