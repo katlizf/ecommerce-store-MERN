@@ -28,6 +28,7 @@ function ImageUpload(props) {
 			setFile(pickedFile)
             setIsValid(true)
             fileIsValid = true
+            // done because setIsValid is not updated immediately so set fileIsValid manually
 		} else {
             setIsValid(false)
             fileIsValid = false
@@ -58,7 +59,7 @@ function ImageUpload(props) {
 					Pick Image
 				</Button>
 			</div>
-            {!isValid && <p>{props.errorText}</p>}
+            {/* {!isValid && <p>{props.errorText}</p>} */}
 		</div>
 	)
 }
