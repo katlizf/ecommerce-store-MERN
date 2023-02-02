@@ -29,14 +29,12 @@ const signup = async (req, res, next) => {
 	const errors = validationResult(req)
 
 	if (!errors.isEmpty()) {
-		console.log(errors)
 		return next(
 			new HttpError("Invalid inputs passed, please check your data.", 422)
 		)
 	}
 
-	const {fName, lName, email, password, address, city, state, zipCode} =
-		req.body
+	const {fName, lName, email, password, address, city, state, zipCode} = req.body
 
 	let existingUser
 
