@@ -1,9 +1,9 @@
-const mongoose = require('mongoose')
+const mongoose = require("mongoose")
 
 const Schema = mongoose.Schema
 
 const animeSchema = new Schema({
-    animeName: {type: String, required: true}
+	animeName: {type: String, required: true},
 })
 
-module.exports = mongoose.model('Anime', animeSchema)
+module.exports = mongoose.model("Anime", animeSchema)
