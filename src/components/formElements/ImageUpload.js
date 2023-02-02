@@ -40,7 +40,7 @@ function ImageUpload(props) {
 	}
 
 	return (
-		<div>
+		<div className="image-upload-form">
 			<input
 				id={props.id}
 				ref={filePickerRef}
@@ -54,7 +54,7 @@ function ImageUpload(props) {
 					{previewUrl && <img src={previewUrl} alt="Preview" />}
 					{!previewUrl && <p>Please pick an image.</p>}
 				</div>
-				<Button type="button" onClick={pickImageHandler}>
+				<Button className="pick-image-btn" type="button" onClick={pickImageHandler}>
 					Pick Image
 				</Button>
 			</div>
