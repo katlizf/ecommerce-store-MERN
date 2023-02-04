@@ -54,6 +54,8 @@ app.use((error, req, res, next) => {
 	res.json({message: error.message || "And unknown error occurred!"})
 })
 
+mongoose.set("strictQuery", false)
+
 mongoose
 	.connect(
 		`mongodb+srv://${process.env.MONGO_USERNAME}:${process.env.MONGO_PASSWORD}@ecommerceapp.54y8xqa.mongodb.net/ecommerce?retryWrites=true&w=majority`
