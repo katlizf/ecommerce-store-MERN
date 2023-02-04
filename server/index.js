@@ -1,9 +1,9 @@
-const path = require("path")
-const fs = require("fs")
 const express = require("express")
 const bodyParser = require("body-parser")
 const dotenv = require("dotenv")
 dotenv.config()
+const fs = require("fs")
+const path = require("path")
 const mongoose = require("mongoose")
 
 const productRoutes = require("./routes/product-routes")
@@ -45,7 +45,6 @@ app.use((error, req, res, next) => {
 		fs.unlink(req.file.path, err => {
 			console.log(err)
 		})
-        // to delete a file
 	}
 	if (res.headerSent) {
 		return next(error)
