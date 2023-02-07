@@ -124,6 +124,7 @@ function Auth() {
 					formData
 				)
 				auth.login(response.user.id)
+                console.log(response.user)
 			} catch (err) {}
 		}
 	}
