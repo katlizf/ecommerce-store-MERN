@@ -1,4 +1,4 @@
-import Product from "./ProductCard"
+import ProductCard from "./ProductCard"
 
 function Products(props) {
     
@@ -14,7 +14,7 @@ function Products(props) {
 		<div>
 			<ul className="products">
 				{props.items.map(product => (
-					<Product
+					<ProductCard
 						key={product.id}
 						id={product.id}
 						productName={product.productName}
