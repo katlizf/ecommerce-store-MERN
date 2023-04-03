@@ -3,7 +3,7 @@
     flex-direction: column;
     justify-content: space-between;
     padding: 2rem 2rem 2rem 2rem;
-    height: 32rem;
+    height: 28rem;
     width: 12rem;
     border-right: 1px solid $light-grey;
     border-bottom: 1px solid $light-grey;
@@ -58,34 +58,24 @@
             height: fit-content;
         }
     }
-    .name-desc {
-        height: 8rem;
-        .name {
-            font-size: 20px;
-            line-height: 1.5rem;
-            margin-bottom: 1.5rem;
-            @include md {
-                font-size: 18px;
-            }
-            @include sm {
-                font-size: small;
-                line-height: 1rem;
-                margin-bottom: 0.5rem;
-            }
+    .name {
+        height: 5rem;
+        font-size: 20px;
+        line-height: 1.5rem;
+        margin-bottom: 1.5rem;
+        @include md {
+            font-size: 18px;
         }
-        .description {
-            font-size: 16px;
+        @include sm {
+            font-size: small;
             line-height: 1rem;
-            @include md {
-                font-size: medium;
-            }
-            @include sm {
-                font-size: smaller;
-                line-height: 0.75rem;
-            }
+            margin-bottom: 0.5rem;
         }
     }
     .price-cart {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
        .price {
             font-size: large;
             line-height: 1rem;
