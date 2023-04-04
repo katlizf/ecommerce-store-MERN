@@ -1,11 +1,38 @@
 .product-modal {
-    .image {
-        height: 20rem;
-    }
-    .name {
-        font-size: x-large;
-    }
-    .description, .price {
-        font-size: large;
-    }
+	.product-details {
+		display: flex;
+		flex-direction: row;
+		justify-content: center;
+		.image {
+			height: 20rem;
+            margin: 0 2rem 0 2rem;
+		}
+		.text-info {
+			width: 20rem;
+            margin: 0 2rem 0 2rem;
+            color: black;
+			.name {
+				margin-top: 3rem;
+				line-height: normal;
+				font-size: 30px;
+			}
+			.description {
+				font-size: 22px;
+			}
+			.size {
+				background: none;
+				border: none;
+				margin-right: 1rem;
+				padding: 8px;
+				font-size: medium;
+			}
+			.size:hover {
+				background-color: $primary-color;
+				color: white;
+			}
+			.price {
+				font-size: 22px;
+			}
+		}
+	}
 }
