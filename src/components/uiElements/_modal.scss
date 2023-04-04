@@ -1,6 +1,7 @@
 .modal {
 	z-index: 100;
 	min-width: 40%;
+    width: fit-content;
     max-height: 80%;
 	background: white;
 	box-shadow: 0 2px 8px rgbd(0, 0, 0, 0.26);
