@@ -5,12 +5,13 @@ const cartControllers = require("../controllers/cart-controller")
 
 const router = express.Router()
 
-router.get("/cart/:uid", cartControllers.getCart)
+router.get("/:uid", cartControllers.getCart)
 
-router.post("/addToCart",
+router.post("/addToCart/:uuid",
     [
-        check("product").not().isEmpty().withMessage("Product is required"),
-        check("user").not().isEmpty().withMessage("User must be specified")
+        check("productId").not().isEmpty().withMessage("Product is required"),
+        check("userId").not().isEmpty().withMessage("User must be specified"),
+        check("quantity").not().isEmpty().withMessage("You must add at least a quantity of 1.")
     ], cartControllers.addToCart
 )
 
