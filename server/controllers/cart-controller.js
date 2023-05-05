@@ -8,7 +8,7 @@ const getCart = async (req, res, next) => {
     let cart
 
     try {
-        cart = await CartProduct.find(userId('userId'))
+        cart = await CartProduct.find(userId("userId"))
     } catch (err) {
         const error = new HttpError(
             "Something went wrong, could not find cart.",
@@ -38,11 +38,13 @@ const addToCart = async (req, res, next) => {
 
     let existingUserCartProduct
 
+    const pipeline = [
+        {$match: {userId: "userId"}},
+        {$match: {productId: "productId"}}
+    ]
+
     try {
-        existingUserCartProduct = await CartProduct.find({
-            "userId": userId,
-            "productId": productId
-        })
+        existingUserCartProduct = await CartProduct.aggregate(pipeline)
     } catch (err) {
         const error = new HttpError(
             "Adding product to cart failed, please try again later.", 500
