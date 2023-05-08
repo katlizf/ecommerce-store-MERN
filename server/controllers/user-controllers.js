@@ -19,7 +19,9 @@ const getUserById = async (req, res, next) => {
 	}
 
 	if (!user) {
-		const error = new HttpError("Could not find a user with that id.", 404)
+		const error = new HttpError(
+            "Could not find a user with that id.", 404
+        )
 		return next(error)
 	}
 
@@ -75,7 +77,9 @@ const signup = async (req, res, next) => {
 	try {
 		await createdUser.save()
 	} catch (err) {
-		const error = new HttpError("Signing up failed, please try again.", 500)
+		const error = new HttpError(
+            "Signing up failed, please try again.", 500
+        )
 		return next(error)
 	}
 
