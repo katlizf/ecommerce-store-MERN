@@ -5,6 +5,8 @@ dotenv.config()
 const fs = require("fs")
 const path = require("path")
 const mongoose = require("mongoose")
+const session = require("express-session")
+const MongoStore = require("connect-mongo")(session)
 
 const productRoutes = require("./routes/product-routes")
 const userRoutes = require("./routes/user-routes")
@@ -15,6 +17,16 @@ const HttpError = require("./models/http-error")
 const app = express()
 
 app.use(bodyParser.json())
+
+app.use(session({
+    secret: "mysecret",
+    resave: false,
+    saveUnintialized: false,
+    store: new MongoStore({mongooseConnection: mongoose.connection}),
+    // don't open a new connect, use mongoose connection
+    cookie: {maxAge: 180 * 60 * 1000}
+    // set session length, 3 hours
+}))
 
 app.use("/uploads/images", express.static(path.join("uploads", "images")))
 
