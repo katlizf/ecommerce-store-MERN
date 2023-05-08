@@ -1,6 +1,7 @@
 const mongoose = require("mongoose")
 const HttpError = require("../models/http-error")
 const Product = require("../models/product")
+const Cart = require("../models/cart")
 
 const getAllProducts = async (req, res, next) => {
 	let products
@@ -81,6 +82,19 @@ const getProductById = async (req, res, next) => {
 	// getters, add an id property to the created object
 }
 
+const addToCart = async (req, res, next) => {
+    const productId = req.params.id
+    const cart = new Cart(req.session.cart ? req.session.cart : {})
+
+    Product.findById(productId, function(err, product) {
+        if (err) {
+            // new HttpError
+        }
+        cart.add(product, product.id)
+        req.session.cart = cart
+    })
+}
+
 const getProductsByUserId = async (req, res, next) => {
 	const userId = req.params.uid
 	let products
@@ -152,5 +166,6 @@ exports.getAllProducts = getAllProducts
 exports.getAllApparel = getAllApparel
 exports.getAllCollectables = getAllCollectables
 exports.getProductById = getProductById
+exports.addToCart = addToCart
 exports.getProductsByUserId = getProductsByUserId
 exports.deleteProduct = deleteProduct

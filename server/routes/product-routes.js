@@ -12,6 +12,8 @@ router.get("/collectables", productControllers.getAllCollectables)
 
 router.get("/:pid", productControllers.getProductById)
 
+router.get("/add-to-cart/:pid", productControllers.addToCart)
+
 router.get("/user/:uid", productControllers.getProductsByUserId)
 
 router.delete("/pid", productControllers.deleteProduct)
