@@ -9,7 +9,10 @@ const getAllProducts = async (req, res, next) => {
 	try {
 		products = await Product.find()
 	} catch (err) {
-		const error = new HttpError("Fetching products failed.", 500)
+		const error = new HttpError(
+            "Fetching products failed.",
+            500
+        )
 		return next(error)
 	}
 

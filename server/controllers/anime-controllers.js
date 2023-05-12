@@ -7,7 +7,10 @@ const getAllAnime = async (req, res, next) => {
 	try {
 		anime = await Anime.find()
 	} catch (err) {
-		const error = new HttpError("Fetching all anime failed.", 500)
+		const error = new HttpError(
+            "Fetching all anime failed.",
+            500
+        )
 		return next(error)
 	}
 
