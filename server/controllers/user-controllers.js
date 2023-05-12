@@ -1,6 +1,7 @@
 const HttpError = require("../models/http-error")
 const User = require("../models/user")
 const {validationResult} = require("express-validator")
+const bcrypt = require("bcryptjs")
 const mongoose = require("mongoose")
 const fs = require("fs")
 
@@ -20,7 +21,8 @@ const getUserById = async (req, res, next) => {
 
 	if (!user) {
 		const error = new HttpError(
-            "Could not find a user with that id.", 404
+            "Could not find a user with that id.",
+            404
         )
 		return next(error)
 	}
@@ -33,7 +35,10 @@ const signup = async (req, res, next) => {
 
 	if (!errors.isEmpty()) {
 		return next(
-			new HttpError("Invalid inputs passed, please check your data.", 422)
+			new HttpError(
+                "Invalid inputs passed, please check your data.",
+                422
+            )
 		)
 	}
 
@@ -59,12 +64,26 @@ const signup = async (req, res, next) => {
 		return next(error)
 	}
 
+    let hashedPassword
+
+    try {
+        hashedPassword = await bcrypt.hash(password, 12)
+        // 12 is the number of salting rounds
+    } catch (err) {
+        const error = new HttpError(
+            "Could not create user, please try again.",
+            500
+        )
+        return next(error)
+    }
+    
+    
+
 	const createdUser = new User({
 		fName,
 		lName,
 		email,
-		password,
-		// need to encrypt password later
+		password: hashedPassword,
 		address,
 		city,
 		state,
@@ -78,7 +97,8 @@ const signup = async (req, res, next) => {
 		await createdUser.save()
 	} catch (err) {
 		const error = new HttpError(
-            "Signing up failed, please try again.", 500
+            "Signing up failed, please try again.",
+            500
         )
 		return next(error)
 	}
@@ -116,7 +136,10 @@ const updateUserProfile = async (req, res, next) => {
 
 	if (!errors.isEmpty()) {
 		return next(
-			new HttpError("Invalid inputs, please check your inputs.", 422)
+			new HttpError(
+                "Invalid inputs, please check your inputs.",
+                422
+            )
 		)
 	}
 
@@ -173,7 +196,10 @@ const deleteUser = async (req, res, next) => {
 	}
 
 	if (!user) {
-		const error = new HttpError("Could not find use for this id.", 404)
+		const error = new HttpError(
+            "Could not find use for this id.",
+            404
+        )
 		return next(error)
 	}
 
