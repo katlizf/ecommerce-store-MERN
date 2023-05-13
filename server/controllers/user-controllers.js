@@ -4,8 +4,8 @@ const {validationResult} = require("express-validator")
 const bcrypt = require("bcryptjs")
 const jwt = require("jsonwebtoken")
 const mongoose = require("mongoose")
-const fs = require("fs")
-const {create} = require("connect-mongo")
+// const fs = require("fs")
+// const {create} = require("connect-mongo")
 
 const getUserById = async (req, res, next) => {
 	const userId = req.params.uid
@@ -88,7 +88,7 @@ const signup = async (req, res, next) => {
 		city,
 		state,
 		zipCode,
-		image: req.file.path,
+		// image: req.file.path,
 		products: [],
 		// adding relationship between user and products
 	})
@@ -124,6 +124,7 @@ const signup = async (req, res, next) => {
 
 const login = async (req, res, next) => {
 	const {email, password} = req.body
+
 	let existingUser
 
 	try {
@@ -257,7 +258,7 @@ const deleteUser = async (req, res, next) => {
 		return next(error)
 	}
 
-    const imagePath = user.image
+    // const imagePath = user.image
 
 	try {
 		const sess = await mongoose.startSession()
@@ -272,9 +273,9 @@ const deleteUser = async (req, res, next) => {
 		return next(error)
 	}
 
-    fs.unlink(imagePath, err => {
-        console.log(err)
-    })
+    // fs.unlink(imagePath, err => {
+    //     console.log(err)
+    // })
     // to delete image along with user
 
 	res.status(200).json({message: "Deleted user."})
