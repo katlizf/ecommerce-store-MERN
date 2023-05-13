@@ -14,7 +14,7 @@ import Button from "../../components/formElements/Button"
 import ErrorModal from "../../components/uiElements/ErrorModal"
 import LoadingSpinner from "../../components/uiElements/LoadingSpinner"
 import PageContainer from "../../components/pageContainer/PageContainer"
-import ImageUpload from "../../components/formElements/ImageUpload"
+// import ImageUpload from "../../components/formElements/ImageUpload"
 
 function Auth() {
 	const auth = useContext(AuthContext)
@@ -46,7 +46,7 @@ function Auth() {
 					city: undefined,
 					state: undefined,
 					zipCode: undefined,
-					image: undefined,
+					// image: undefined,
 				},
 				formState.inputs.email.isValid &&
 					formState.inputs.password.isValid
@@ -79,10 +79,10 @@ function Auth() {
 						value: "",
 						isValid: false,
 					},
-					image: {
-						value: null,
-						isValid: false,
-					},
+					// image: {
+					// 	value: null,
+					// 	isValid: false,
+					// },
 				},
 				false
 			)
@@ -104,7 +104,7 @@ function Auth() {
 					}),
 					{"Content-Type": "application/json"}
 				)
-				auth.login(response.user.id)
+				auth.login(response.userId, response.token)
 			} catch (err) {}
 		} else {
 			try {
@@ -117,14 +117,13 @@ function Auth() {
 				formData.append("city", formState.inputs.city.value)
 				formData.append("state", formState.inputs.state.value)
 				formData.append("zipCode", formState.inputs.zipCode.value)
-				formData.append("image", formState.inputs.image.value)
+				// formData.append("image", formState.inputs.image.value)
 				const response = await sendRequest(
 					"http://localhost:5000/api/users/signup",
 					"POST",
 					formData
 				)
-				auth.login(response.user.id)
-                console.log(response.user)
+				auth.login(response.userId, response.token)
 			} catch (err) {}
 		}
 	}
@@ -155,11 +154,11 @@ function Auth() {
 									onInput={inputHandler}
 								/>
 							</div>
-							<ImageUpload
+							{/* <ImageUpload
 								id="image"
 								onInput={inputHandler}
 								// errorText="Please provide an image."
-							/>
+							/> */}
 							<Input
 								id="address"
 								type="text"

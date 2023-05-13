@@ -6,7 +6,7 @@ import Button from "../formElements/Button"
 import ErrorModal from "../uiElements/ErrorModal"
 import LoadingSpinner from "../uiElements/LoadingSpinner"
 import Modal from "../uiElements/Modal"
-import Avatar from "../uiElements/Avatar"
+// import Avatar from "../uiElements/Avatar"
 
 function UserDetails({
 	id,
@@ -18,7 +18,7 @@ function UserDetails({
 	city,
 	state,
 	zipCode,
-	image,
+	// image,
 }) {
 	const {isLoading, error, sendRequest, clearError} = useHttpClient()
 	const auth = useContext(AuthContext)
@@ -76,11 +76,11 @@ function UserDetails({
 				</p>
 			</Modal>
 			<div className="profile-info">
-				<Avatar
+				{/* <Avatar
 					id="profile-pic"
 					image={`http://localhost:5000/${image}`}
 					alt={fName}
-				/>
+				/> */}
 				<div className="cust-name">
 					<h2 className="profile-detail">
 						{fName} {lName}
