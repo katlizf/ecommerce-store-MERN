@@ -2,8 +2,10 @@ const HttpError = require("../models/http-error")
 const User = require("../models/user")
 const {validationResult} = require("express-validator")
 const bcrypt = require("bcryptjs")
+const jwt = require("jsonwebtoken")
 const mongoose = require("mongoose")
 const fs = require("fs")
+const {create} = require("connect-mongo")
 
 const getUserById = async (req, res, next) => {
 	const userId = req.params.uid
@@ -75,9 +77,7 @@ const signup = async (req, res, next) => {
             500
         )
         return next(error)
-    }
-    
-    
+    } 
 
 	const createdUser = new User({
 		fName,
@@ -103,7 +103,23 @@ const signup = async (req, res, next) => {
 		return next(error)
 	}
 
-	res.status(201).json({user: createdUser.toObject({getters: true})})
+    let token
+
+    try {
+        token = jwt.sign(
+            {userId: createdUser.id, email: createdUser.email},
+            "secret",
+            {expiresIn: "1h"}
+        )
+    } catch (err) {
+        const error = new HttpError(
+            "Signing up failed, please try again later.",
+            500
+        )
+        return next(error)
+    }
+
+	res.status(201).json({userId: createdUser.id, fName: createdUser.fName, lName: createdUser.lName, email: createdUser.email, address: createdUser.address, city: createdUser.city, state: createdUser.state, zipCode: createdUser.zipCode, token: token})
 }
 
 const login = async (req, res, next) => {
@@ -120,7 +136,7 @@ const login = async (req, res, next) => {
 		return next(error)
 	}
 
-	if (!existingUser || existingUser.password !== password) {
+	if (!existingUser) {
 		const error = new HttpError(
 			"Invalid credentials, could not log you in.",
 			401
@@ -128,7 +144,45 @@ const login = async (req, res, next) => {
 		return next(error)
 	}
 
-	res.status(200).json({user: existingUser.toObject({getters: true})})
+    let isValidPassword = false
+
+    try {
+        isValidPassword = await bcrypt.compare(password, existingUser.password)
+    } catch (err) {
+        const error = new HttpError(
+            "Could not log you in, please check your credentials and try again.",
+            500
+        )
+        return next(error)
+    }
+
+    if(!isValidPassword) {
+        const error = new HttpError(
+			"Invalid credentials, could not log you in.",
+			401
+		)
+		return next(error)
+    }
+
+    // once checks have passed, can generate a token, a string
+    let token
+
+    try {
+        token = jwt.sign(
+            {userId: existingUser.id, email: existingUser.email},
+            "secret",
+            {expiresIn: "1h"}
+        )
+    } catch (err) {
+        const error = new HttpError(
+            "Loggin in failed, please try again later.",
+            500
+        )
+        return next(error)
+    }
+
+
+	res.status(200).json({userId: existingUser.id, fName: existingUser.fName, lName: existingUser.lName, email: existingUser.email, address: existingUser.address, city: existingUser.city, state: existingUser.state, zipCode: existingUser.zipCode, token: token})
 }
 
 const updateUserProfile = async (req, res, next) => {
