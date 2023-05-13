@@ -81,5 +81,5 @@ const mongoose = require("mongoose")
 //     res.status(201).json({cartProduct: newCartProduct.toObject({getters:true})})
 // }
 
-exports.getCart = getCart
-exports.addToCart = addToCart
+// exports.getCart = getCart
+// exports.addToCart = addToCart
